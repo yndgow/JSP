@@ -26,7 +26,13 @@
 				</tr>
 				<tr>
 					<td>학년</td>
-					<td><input type="number" name="stdYear" placeholder="학년 입력"></td>
+					<td>
+						<select name="stdYear">
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+						</select>
+					</td>
 				</tr>
 				<tr>
 					<td>주소</td>
