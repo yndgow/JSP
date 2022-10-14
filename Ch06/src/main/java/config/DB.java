@@ -23,3 +23,4 @@ public class DB {
 		return DriverManager.getConnection(HOST, USER, PASS);
 	}
 }
+
