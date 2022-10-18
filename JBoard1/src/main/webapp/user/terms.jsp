@@ -4,6 +4,22 @@
 <%@page import="config.DBCP"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp" %>
+<script>
+	$(function(){
+		$('.next').click(function(e){
+			let isCheck1 = $('input[class=terms]').is(':checked');
+			let isCheck2 = $('input[class=privacy]').is(':checked');
+
+			if(isCheck1 && isCheck2){
+				return true;
+			}else{
+				alert('모두 동의하셔야 합니다.');
+				return false;
+			}
+		});
+	});
+
+</script>
 <%
 	String terms = null;
 	String privacy = null;
