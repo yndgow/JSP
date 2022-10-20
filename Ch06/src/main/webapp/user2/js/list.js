@@ -30,8 +30,8 @@ function list(){
 					tags += "<td>"+user.hp+"</td>";
 					tags += "<td>"+user.age+"</td>";
 					tags += "<td>";
-					tags += "<a href='./json/modify.jsp?uid="+user.uid+"' id='modify'>수정</a>";
-					tags += "<a href='./json/delete_user.jsp?uid="+user.uid+"' id='modify'>삭제</a>";
+					tags += "<a href='./json/modify.jsp' id='modify'>수정</a>";
+					tags += "<a href='./json/delete_user.jsp' id='delete'>삭제</a>";
 					
 					tags += "</td>";
 					tags += "</tr>";

@@ -7,7 +7,9 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 	<script src="./js/list.js"></script>
 	<script src="./js/register.js"></script>
-	<script src="./js/add.js"></script>
+	<script src="./js/submit.js"></script>
+	<script src="./js/delete_user.js"></script>
+	<script src="./js/modify.js"></script>
 	<script>
 		$(function() {
 			
@@ -29,29 +31,30 @@
 			// user 등록(submit)
 			$(document).on('click', 'input[type=submit]', function(e) {
 				e.preventDefault();
-				add();
+				let opt = 0;
+				if($(this).val()=='등록'){
+					opt = 1;
+				}else{
+					opt = 2;
+				}
+				submit(opt);
 			});
 			
 			// user 삭제(delete_user)
 			$(document).on('click', '#delete', function(e) {
 				e.preventDefault();
-				
-				$.ajax({
-					url:'./json/delete_user.jsp',
-					type:'put',
-					dataType: 'json',
-					success:function(data){
-						if(data.result == 1){
-							alert('삭제 성공');
-							list();
-						}else{
-							alert('삭제 실패');
-						}
-						
-					},
-				});
-				//delete_user();
+				let uid = $(this).parents('tr').children('td:eq(0)').text();
+				delete_user(uid);	
 			});
+			
+			// user 수정(modify)
+			$(document).on('click', '#modify', function(e) {
+				e.preventDefault();
+				let uid = $(this).parents('tr').children('td:eq(0)').text();
+				modify(uid);
+			});
+			
+			// user 수정(modify_user)
 			
 		});
 	</script>
