@@ -34,8 +34,12 @@
 		<a href="./list.jsp">도서목록</a>
 		<form action="../proc/bookProc.jsp" method="post">
 		<input type="hidden" name="opt" value="opt_register">
-			<input type="hidden" name="bookId" value="<%= book.getBookId()+1 %>">
+			<%-- <input type="hidden" name="bookId" value="<%= book.getBookId()+1 %>"> --%>
 			<table border="1">
+				<tr>
+					<td>도서번호</td>
+					<td><input type="text" name="bookId" value="<%= book.getBookId()+1 %>" readonly="readonly"></td>
+				</tr>
 				<tr>
 					<td>도서명</td>
 					<td><input type="text" name="bookName" placeholder="도서명 입력"></td>
