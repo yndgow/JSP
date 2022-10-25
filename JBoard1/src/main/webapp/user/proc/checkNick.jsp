@@ -1,3 +1,4 @@
+<%@page import="kr.co.jboard1.db.Sql"%>
 <%@page import="com.google.gson.JsonObject"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
@@ -15,8 +16,7 @@
 	
 	try{
 		Connection conn = DBCP.getConnection();
-		String sql = "SELECT COUNT(`nick`) FROM `board_user` WHERE `nick` = ?;";
-		PreparedStatement psmt = conn.prepareStatement(sql);
+		PreparedStatement psmt = conn.prepareStatement(Sql.SELECT_COUNT_NICK);
 		psmt.setString(1, nick);
 		
 		ResultSet rs = psmt.executeQuery();

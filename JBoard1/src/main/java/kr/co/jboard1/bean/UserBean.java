@@ -1,6 +1,6 @@
 package kr.co.jboard1.bean;
 
-public class userBean {
+public class UserBean {
 	private String uid;
 	private String pass;
 	private String name;

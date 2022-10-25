@@ -1,27 +1,28 @@
-<%@page import="kr.co.jboard1.bean.userBean"%>
+<%@page import="kr.co.jboard1.db.Sql"%>
+<%@page import="kr.co.jboard1.bean.UserBean"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="kr.co.jboard1.db.DBCP"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
+
 	request.setCharacterEncoding("UTF-8");
 	String uid  = request.getParameter("uid");
 	String pass = request.getParameter("pass");
 	
-	userBean ub = null;
+	UserBean ub = null;
 	
 	try{
 		Connection conn = DBCP.getConnection();
-		String sql = "SELECT * FROM `board_user` WHERE `uid` =? and `pass`=SHA2(?, 256)";
-		PreparedStatement psmt = conn.prepareStatement(sql);
+		PreparedStatement psmt = conn.prepareStatement(Sql.SELECT_USER);
 		psmt.setString(1, uid);
 		psmt.setString(2, pass);
 		
 		ResultSet rs = psmt.executeQuery();
 		
 		if(rs.next()){
-			ub = new userBean();
+			ub = new UserBean();
 			ub.setUid(rs.getString(1));
 			ub.setPass(rs.getString(2));
 			ub.setName(rs.getString(3));
@@ -51,5 +52,4 @@
 		// 회원이 아닌 경우
 		response.sendRedirect("/JBoard1/user/login.jsp?success=100");
 	}
-	
 %>
