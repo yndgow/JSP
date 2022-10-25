@@ -1,4 +1,3 @@
-<%@page import="config.DB"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="bean.MemberBean"%>

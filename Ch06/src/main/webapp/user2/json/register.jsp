@@ -1,3 +1,4 @@
+<%@page import="config.DB"%>
 <%@page import="com.google.gson.JsonObject"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="com.google.gson.Gson"%>
@@ -7,8 +8,6 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
-<%@page import="config.DB"%>
-<%@page import="config.DBCP"%>
 <%@ page contentType="application/json;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("UTF-8");
