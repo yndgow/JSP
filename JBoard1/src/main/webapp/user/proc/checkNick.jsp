@@ -1,7 +1,7 @@
 <%@page import="com.google.gson.JsonObject"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
-<%@page import="config.DBCP"%>
+<%@page import="kr.co.jboard1.db.DBCP"%>
 <%@page import="java.sql.Connection"%>
 <%@ page contentType="application/json;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
