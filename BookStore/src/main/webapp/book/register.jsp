@@ -1,7 +1,7 @@
+<%@page import="config.DBCP"%>
 <%@page import="bean.Book"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
-<%@page import="config.DBCP"%>
 <%@page import="java.sql.Connection"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%	// bookId 자동증가
