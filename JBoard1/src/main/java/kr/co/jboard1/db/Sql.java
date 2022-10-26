@@ -3,7 +3,7 @@ package kr.co.jboard1.db;
 public class Sql {
 	
 	// user
-	public static final String INSERT_USER 		 = "INSERT INTO `board_user` SET"
+	public static final String INSERT_USER 		 = "INSERT INTO `board_user` SET "
 												+ "`uid`=?,"
 												+ "`pass`=SHA2(?, 256),"
 												+ "`name`=?,"
@@ -22,4 +22,23 @@ public class Sql {
 	public static final String SELECT_TERMS 	 = "SELECT * FROM `board_terms`";
 	
 	// board
+	public static final String INSERT_ARTICLE = "INSERT INTO `board_article` SET "
+//												+ "`parent`=?,"
+//												+ "`comment`=?,"
+//												+ "`cate`=?,"
+												+ "`title`=?,"
+												+ "`content`=?,"
+												+ "`file`=?,"
+//												+ "`hit`=?,"
+												+ "`uid`=?,"
+												+ "`regip`=?,"
+												+ "`rdate`=NOW()";
+	// file
+	public static final String INSERT_FILE = "INSERT INTO `board_file` SET "
+											+ "`parent`=?,"
+											+ "`newName`=?,"
+											+ "`oriName`=?,"
+											+ "`rdate`=NOW()";
+
+	public static final String SELECT_MAX_NO = "SELECT MAX(`no`) FROM `board_article`";
 }
