@@ -1,10 +1,10 @@
+<%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.io.File"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
-<%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@page import="kr.co.jboard1.bean.UserBean"%>
 <%@page import="kr.co.jboard1.db.Sql"%>
 <%@page import="java.sql.PreparedStatement"%>
@@ -17,7 +17,8 @@
 	// multipart 전송 데이터 수신
 	String savePath = application.getRealPath("/file");
 	int maxSize = 1024 * 1024 * 10; // 최대 파일 업로드 허용량 10MB
-	MultipartRequest mr = new MultipartRequest(request, savePath, maxSize, "UTF-8", new DefaultFileRenamePolicy());
+	DefaultFileRenamePolicy policy = new DefaultFileRenamePolicy();
+	MultipartRequest mr = new MultipartRequest(request, savePath, maxSize, "UTF-8", policy);
 
 	String title 	= mr.getParameter("title");
 	String content  = mr.getParameter("content");
