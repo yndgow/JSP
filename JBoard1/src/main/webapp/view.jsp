@@ -1,19 +1,44 @@
+<%@page import="kr.co.jboard1.dao.ArticleDAO"%>
+<%@page import="kr.co.jboard1.db.Sql"%>
+<%@page import="kr.co.jboard1.bean.ArticleBean"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="kr.co.jboard1.db.DBCP"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("UTF-8");
+	String no = request.getParameter("no");
+
+	ArticleDAO dao = ArticleDAO.getInstance();
+	
+	// 글 조회수 카운트 +1
+	dao.updateArticleHit(no);
+	
+	// 글 가져오기
+	ArticleBean article = dao.selectArticle(no);
+
+%>
 <%@ include file="./_header.jsp" %>
             <main id="board" class="view">
                 <table>
                     <caption>
                         <tr>
                             <th>제목</th>
-                            <td><input type="text" name="title" readonly></td>
+                            <td><input type="text" name="title" value="<%= article.getTitle() %>"></td>
                         </tr>
+                        <% if (article.getFile() == 1) {%>
                         <tr>
                             <th>파일</th>
-                            <td><a href="#">2020년 상반기 매출자료.xls</a><span>7</span>회 다운로드</td>
+                            <td>
+	                            <a href="/JBoard1/proc/download.jsp?fno=<%= article.getFno() %>"><%= article.getOriName() %></a>
+    	                        <span><%= article.getDownload() %></span>회 다운로드
+                            </td>
                         </tr>
+                        <% } %>
                         <tr>
                             <th>내용</th>
-                            <td><textarea name="content" readonly>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas deleniti dolore doloribus accusamus asperiores, quam fugiat repudiandae quibusdam assumenda enim nesciunt non voluptatum aspernatur officia necessitatibus, veritatis saepe perferendis nobis accusantium! Voluptate eligendi omnis consectetur ad hic alias exercitationem voluptas quam ipsam. Labore, facere mollitia odit, modi excepturi possimus animi quis harum exercitationem quibusdam quasi optio molestiae accusantium voluptatum itaque id dignissimos nemo nostrum voluptas eaque nulla ea qui. Quidem nesciunt adipisci recusandae error ut eveniet, voluptatibus dolore doloremque deserunt, in quo exercitationem porro molestiae cum ipsum corporis, qui eius. Assumenda possimus delectus enim nihil ea facilis quam corrupti similique!</textarea></td>
+                            <td><textarea name="content" readonly><%= article.getContent() %></textarea></td>
                         </tr>
                     </caption>
                 </table>
