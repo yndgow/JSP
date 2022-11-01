@@ -1,3 +1,5 @@
+<%@page import="kr.co.jboard1.bean.ArticleBean"%>
+<%@page import="kr.co.jboard1.dao.ArticleDAO"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
@@ -29,36 +31,17 @@
 	//System.out.println("fname : " + fname);
 	//System.out.println("savePath : " + savePath);
 	
-	int result = 0;
-	int parent = 0;
+	ArticleBean article = new ArticleBean();
+	article.setTitle(title);
+	article.setContent(content);
+	article.setUid(uid);
+	article.setfname(fname);
+	article.setRegip(regip);
 	
-	try{
-		Connection conn = DBCP.getConnection();
-		conn.setAutoCommit(false); // 트랜잭션 1
-		
-		Statement stmt = conn.createStatement();
-		PreparedStatement psmt = conn.prepareStatement(Sql.INSERT_ARTICLE);
-		psmt.setString(1, title);
-		psmt.setString(2, content);
-		psmt.setInt(3, fname == null ? 0 : 1);
-		psmt.setString(4, uid);
-		psmt.setString(5, regip);
-		
-		result = psmt.executeUpdate(); // INSERT
-		ResultSet rs = stmt.executeQuery(Sql.SELECT_MAX_NO); // SELECT
-		
-		conn.commit(); // 트랜잭션 1 끝
-		
-		if(rs.next()){
-			parent = rs.getInt(1);	
-		}
-		stmt.close();
-		psmt.close();
-		conn.close();
-		
-	}catch(Exception e){
-		e.printStackTrace();
-	}
+	
+	ArticleDAO dao = ArticleDAO.getInstance();
+	int parent = dao.insertArticle(article);
+
 	
 	// 파일을 첨부했으면 파일명 수정작업
 	if(fname != null){
@@ -76,25 +59,9 @@
 		oriFile.renameTo(newFile);
 		
 		// 파일 테이블 저장
-		try{
-			Connection conn = DBCP.getConnection();
-			PreparedStatement psmt = conn.prepareStatement(Sql.INSERT_FILE);
-			psmt.setInt(1, parent);
-			psmt.setString(2, newFname);
-			psmt.setString(3, fname);
-			
-			psmt.executeUpdate();
-			psmt.close();
-			conn.close();
-			
-		}catch(Exception e){
-			e.printStackTrace();
-		}
+		dao.insertFile(parent, newFname, fname);
 	}
 	
-	if(result == 1){
-		response.sendRedirect("/JBoard1/list.jsp");	
-	}else{
+	response.sendRedirect("/JBoard1/list.jsp");	
 		
-	}
 %>
