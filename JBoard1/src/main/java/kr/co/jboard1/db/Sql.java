@@ -87,9 +87,13 @@ public class Sql {
 														+ "ORDER BY `no` DESC "
 														+ "LIMIT 1;";
 	
+	public static final String UPDATE_COMMENT = "UPDATE `board_article` SET "
+												+ "`content` = ?, "
+												+ "`rdate`=NOW() "
+												+ "WHERE `no`= ? ";
 	
-	
-	
+	// 댓글 삭제
+	public static final String DELETE_COMMENT = "DELETE FROM `board_article` WHERE `no` = ?";
 	
 	
 	

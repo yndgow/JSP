@@ -55,6 +55,8 @@ public class ArticleDAO {
 			}
 			return parent;
 	}
+	
+	// 파일 업로드
 	public void insertFile(int parent, String newFname, String fname) {
 		try{
 			Connection conn = DBCP.getConnection();
@@ -72,6 +74,7 @@ public class ArticleDAO {
 		}
 	}
 	
+	// 댓글 쓰기
 	public ArticleBean insertComment(ArticleBean comment) {
 		
 		ArticleBean article = null;
@@ -112,6 +115,7 @@ public class ArticleDAO {
 		return article;
 	}
 	
+	// 글 보기
 	public ArticleBean selectArticle(String no) {
 		ArticleBean article = null;
 		
@@ -151,6 +155,8 @@ public class ArticleDAO {
 		
 		return article;
 	}
+	
+	// 글 목록 보기
 	public List<ArticleBean> selectArticles(int start) {
 		
 		List<ArticleBean> articles = new ArrayList<>();
@@ -193,6 +199,7 @@ public class ArticleDAO {
 		
 	}
 	
+	//
 	public FileBean selectFile(String fno) {
 		
 		FileBean fb = null;
@@ -317,4 +324,63 @@ public class ArticleDAO {
 			
 		}
 	}
+	
+	// 댓글 수정
+	public int updateComment(String no, String content) {
+		
+		int result = 0;
+		
+		try{
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Sql.UPDATE_COMMENT);
+			psmt.setString(1, content);
+			psmt.setString(2, no);
+			result = psmt.executeUpdate();
+				
+			psmt.close();
+			conn.close();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	// 댓글 삭제
+	public int deleteComment(String no) {
+		
+		int result = 0;
+		
+		try {
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Sql.DELETE_COMMENT);
+			psmt.setString(1, no);
+			result = psmt.executeUpdate();
+			
+			
+			psmt.close();
+			conn.close();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
