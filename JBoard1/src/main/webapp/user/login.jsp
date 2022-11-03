@@ -13,6 +13,8 @@
 		alert('먼저 로그인을 하셔야 합니다.');
 	}else if(success == '201'){
 		alert('정상적으로 로그아웃 되었습니다.');
+	}else if(success == '300'){
+		alert('회원가입을 환영합니다. 로그인해주십시오');
 	}
 </script>
         <main id="user" class="login">

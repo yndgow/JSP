@@ -231,6 +231,7 @@ public class ArticleDAO {
 		return fb;
 	}
 	
+	// 댓글 목록
 	public List<ArticleBean> selectComments(String parent) {
 		
 		List<ArticleBean> comments = new ArrayList<>();
@@ -284,9 +285,74 @@ public class ArticleDAO {
 		}
 	}
 	
-	public void updateArticle() {}
-	public void deleteArticle() {}
+	// 게시물 수정
+	public int updateArticle(String no, String title, String content) {
+		int result = 0;
+		try {
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Sql.UPDATE_ARTICLE);
+			psmt.setString(1, title);
+			psmt.setString(2, content);
+			psmt.setString(3, no);
+			result = psmt.executeUpdate();
+			
+			psmt.close();
+			conn.close();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	// 게시물 삭제
+	public int deleteArticle(String no) {
+		int result = 0;
+		
+		try {
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Sql.DELETE_ARTICLE);
+			psmt.setString(1, no);
+			psmt.setString(2, no);
+			result = psmt.executeUpdate();
+			
+			psmt.close();
+			conn.close();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 
+	public String deleteFile(String no) {
+		//int result = 0;
+		String newName = null;
+		
+		try {
+			Connection conn = DBCP.getConnection();
+			conn.setAutoCommit(false);
+			
+			PreparedStatement psmt1 = conn.prepareStatement(Sql.SELECT_FILE_WITH_PARENT);
+			PreparedStatement psmt2 = conn.prepareStatement(Sql.DELETE_FILE);
+			psmt1.setString(1, no);
+			psmt2.setString(1, no);
+			
+			ResultSet rs =  psmt1.executeQuery();
+			if(rs.next()) newName = rs.getString(3);
+			
+			psmt2.executeUpdate();
+			
+			conn.commit();
+			
+			psmt1.close();
+			psmt2.close();
+			conn.close();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return newName;
+	}
+	
 	// 전체 게시물 카운트
 	public int selectCountTotal() {
 		int total = 0;

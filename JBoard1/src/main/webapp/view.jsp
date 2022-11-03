@@ -154,7 +154,7 @@
                     <caption>
                         <tr>
                             <th>제목</th>
-                            <td><input type="text" name="title" value="<%= article.getTitle() %>"></td>
+                            <td><input type="text" name="title" value="<%= article.getTitle() %>" readonly="readonly"></td>
                         </tr>
                         <% if (article.getFile() == 1) {%>
                         <tr>
@@ -172,9 +172,11 @@
                     </caption>
                 </table>
                 <div>
-                    <a href="#" class="btn btnRemove">삭제</a>
-                    <a href="./modify.jsp" class="btn btnModify">수정</a>
-                    <a href="./list.jsp?pg=<%= pg %>" class="btn btnList">목록</a>
+                	<% if(sessUser.getUid().equals(article.getUid())) { %>
+                    <a href="/JBoard1/proc/deleteProc.jsp?no=<%= article.getNo() %>&pg=<%= pg %>" class="btn btnRemove" onclick="confirm('글을 삭제하시겠습니까?')">삭제</a>
+                    <a href="/JBoard1/modify.jsp?no=<%= article.getNo() %>&pg=<%= pg %>" class="btn btnModify">수정</a>
+                    <% } %>
+                    <a href="/JBoard1/list.jsp?pg=<%= pg %>" class="btn btnList">목록</a>
                 </div>
 
                 <!-- 댓글목록 -->
@@ -186,8 +188,10 @@
                         <span class="date"><%= comment.getRdate() %></span>
                         <p class="content"><%= comment.getContent() %></p>
                         <div>
+                        	<% if(sessUser.getUid().equals(comment.getUid())) { %>
                             <a href="#" class="remove" data-no="<%= comment.getNo() %>">삭제</a>
                             <a href="#" class="modify" data-no="<%= comment.getNo() %>">수정</a>
+                            <% } %>
                         </div>
                     </article>
 					<% } %>

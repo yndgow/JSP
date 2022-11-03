@@ -23,13 +23,10 @@ public class Sql {
 	
 	// board
 	public static final String INSERT_ARTICLE = "INSERT INTO `board_article` SET "
-//												+ "`parent`=?,"
-//												+ "`comment`=?,"
-//												+ "`cate`=?,"
+//												+ "`parent`=?, `comment`=?, `cate`=?, `hit`=?,"
 												+ "`title`=?,"
 												+ "`content`=?,"
 												+ "`file`=?,"
-//												+ "`hit`=?,"
 												+ "`uid`=?,"
 												+ "`regip`=?,"
 												+ "`rdate`=NOW()";
@@ -63,6 +60,7 @@ public class Sql {
 												+ "WHERE `no` = ?";
 	
 	public static final String SELECT_FILE = "SELECT * FROM `board_file` WHERE `fno`= ?";
+	public static final String SELECT_FILE_WITH_PARENT = "SELECT * FROM `board_file` WHERE `parent`= ?";
 	
 	public static final String UPDATE_ARTICLE_HIT = "UPDATE `board_article` "
 													+ "SET `hit` = `hit`+1 "
@@ -95,12 +93,15 @@ public class Sql {
 	// 댓글 삭제
 	public static final String DELETE_COMMENT = "DELETE FROM `board_article` WHERE `no` = ?";
 	
+	// 게시글 수정
+	public static final String UPDATE_ARTICLE = "UPDATE `board_article` SET `title` = ?, `content` = ?, `rdate` = NOW() WHERE `no` = ?";
 	
 	
+	// 게시글 삭제
+	public static final String DELETE_ARTICLE = "DELETE FROM `board_article` WHERE `no` = ? OR `parent` = ?";
 	
-	
-	
-	
+	// 파일 삭제(DB)
+	public static final String DELETE_FILE = "DELETE FROM `board_file` WHERE `parent` = ?";
 	
 	
 	
