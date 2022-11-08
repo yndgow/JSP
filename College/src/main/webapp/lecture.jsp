@@ -13,58 +13,9 @@
   <head>
     <meta charset="UTF-8" />
     <title>강좌관리</title>
-	<!-- <script src="../js/toggleForm.js"></script> -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-	<script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const callForm = document.getElementById("callForm");
-        const form = document.getElementById("form");
-        callForm.addEventListener("click", function () {
-          form.style.visibility = "visible";
-        });
-        const closeForm = document.getElementById("closeForm");
-
-        closeForm.addEventListener("click", function () {
-          form.style.visibility = "hidden";
-        });
-      });
-      $().ready(function(){
-    	  
-    	  $(document).on('click', '.submit', function(e){
-    		      		  
-    		  let jsonData = {
-    				  lecNo : $('input[name=lecNo]').val(),
-    				  lecName : $('input[name=lecName]').val(),
-    				  lecCredit : $('input[name=lecCredit]').val(),
-    				  lecTime : $('input[name=lecTime]').val(),
-    				  lecClass : $('input[name=lecClass]').val()
-    		  };
-    		  e.preventDefault();
-    		  $.ajax({
-   	    		 url:'./insertLectureProc.jsp',
-   	    		 type:'post',
-   	    		 data:jsonData,
-   	    		 dataType:'json',
-   	    		 success:function(data){
-    	    			 //console.log(data);
-    	    			$('.contentTr').remove();
-    	    			let tag = "";
-    	    			for (var i = 0; i < data.length; i++) {
-    	    				tag += "<tr>";
-        	    			tag += "<td>"+data[i].lecNo+"</td>";
-        	    			tag += "<td>"+data[i].lecName+"</td>";
-        	    			tag += "<td>"+data[i].lecCredit+"</td>";
-        	    			tag += "<td>"+data[i].lecTime+"</td>";
-        	    			tag += "<td>"+data[i].lecClass+"</td>";
-        	    			tag += "</tr>";
-						}
-    	    			$('#contentTable').append(tag);
-    	    			 
-   	    		 },
-   	    	  });  
-    	  })
-      })
-    </script>
+	<script src="./js/toggleForm.js"></script>
+	<script></script>
   </head>
   <body>
     <h3>강좌관리</h3>
@@ -84,11 +35,11 @@
       </tr>
       <c:forEach items="${llb}" var="lb">
       	<tr class="contentTr">
-	        <td><c:out value="${lb.lecNo}"></c:out> </td>
-	        <td><c:out value="${lb.lecName}"></c:out> </td>
-	        <td><c:out value="${lb.lecCredit}"></c:out> </td>
-	        <td><c:out value="${lb.lecTime}"></c:out> </td>
-	        <td><c:out value="${lb.lecClass}"></c:out> </td>
+	        <td>${lb.lecNo}</td>
+	        <td>${lb.lecName}</td>
+	        <td>${lb.lecCredit}</td>
+	        <td>${lb.lecTime}</td>
+	        <td>${lb.lecClass}</td>
       	</tr>
       </c:forEach>
     </table>
@@ -96,31 +47,33 @@
     <div id="form" style="visibility: hidden">
       <h4>강좌등록</h4>
       <button id="closeForm">닫기</button>
-      <table border="1">
-        <tr>
-          <td>번호</td>
-          <td><input type="text" name="lecNo" /></td>
-        </tr>
-        <tr>
-          <td>강좌명</td>
-          <td><input type="text" name="lecName" /></td>
-        </tr>
-        <tr>
-          <td>학점</td>
-          <td><input type="text" name="lecCredit" /></td>
-        </tr>
-        <tr>
-          <td>시간</td>
-          <td><input type="text" name="lecTime" /></td>
-        </tr>
-        <tr>
-          <td>강의장</td>
-          <td><input type="text" name="lecClass" /></td>
-        </tr>
-        <tr>
-          <td colspan="2" align="right"><button class="submit">추가</button></td>
-        </tr>
-      </table>
+      <form id="resetForm">
+	      <table border="1">
+	        <tr>
+	          <td>번호</td>
+	          <td><input type="text" name="lecNo"/></td>
+	        </tr>
+	        <tr>
+	          <td>강좌명</td>
+	          <td><input type="text" name="lecName"/></td>
+	        </tr>
+	        <tr>
+	          <td>학점</td>
+	          <td><input type="text" name="lecCredit"/></td>
+	        </tr>
+	        <tr>
+	          <td>시간</td>
+	          <td><input type="text" name="lecTime"/></td>
+	        </tr>
+	        <tr>
+	          <td>강의장</td>
+	          <td><input type="text" name="lecClass" /></td>
+	        </tr>
+	        <tr>
+	          <td colspan="2" align="right"><button class="submitLecture">추가</button></td>
+	        </tr>
+	      </table>
+      </form>
     </div>
   </body>
 </html>

@@ -22,11 +22,11 @@ public class SQL {
 														+ "WHERE a.`regStdNo` = ?";
 	public static final String INSERT_REGISTER = "INSERT `register` SET "
 												+ "`regStdNo`=?, "
-												+ "`regLecNo`=?, "
-												+ "`regMidScore`=?, "
-												+ "`regFinalScore`=?, "
-												+ "`regTotalScore`=?, "
-												+ "`regGrade`=?";
+												+ "`regLecNo`=? ";
+//												+ "`regMidScore`=?, "
+//												+ "`regFinalScore`=?, "
+//												+ "`regTotalScore`=?, "
+//												+ "`regGrade`=?";
 	
 	// 학생
 	public static final String SELECT_STUDENTS= "SELECT * FROM `student`";
