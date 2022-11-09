@@ -13,7 +13,7 @@ public class SQL {
 	// 수강
 	public static final String SELECT_REGISTERS = "SELECT b.stdName, c.lecName, a.* "
 												+ "FROM `register` AS a "
-												+ "JOIN `student` AS b ON a.regStdNo = b.stdNo "
+												+ "left JOIN `student` AS b ON a.regStdNo = b.stdNo "
 												+ "JOIN `lecture` AS c ON c.lecNo = a.regLecNo";
 	public static final String SELECT_REGISTER_STDNO = "SELECT b.stdName, c.lecName, a.* "
 														+ "FROM `register` AS a "

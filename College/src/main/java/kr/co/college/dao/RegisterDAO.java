@@ -26,9 +26,7 @@ public class RegisterDAO {
 		try {
 			Connection conn = DBCP.getConnection();
 			Statement stmt = conn.createStatement();
-			
 			ResultSet rs = stmt.executeQuery(SQL.SELECT_REGISTERS);
-			
 			while(rs.next()) {
 				RegisterBean rb = new RegisterBean();
 				rb.setStdName(rs.getString(1));

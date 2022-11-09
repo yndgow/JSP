@@ -29,7 +29,7 @@
     <a href="./student.jsp">학생관리</a>
 
     <h4>수강현황</h4>
-    <input type="text" name="regStdNo" />
+    <input type="text" name="searchRegStdNo" />
     <button id="search">검색</button>
     <button id="callForm">등록</button>
     <table border="1" id="contentTable">
@@ -78,8 +78,6 @@
 	              <c:forEach items="${llb}" var="lb">
 	              	<option value="${lb.lecNo}">${lb.lecName}</option>
 	              </c:forEach>
-	              
-	              
 	            </select>
 	          </td>
 	        </tr>

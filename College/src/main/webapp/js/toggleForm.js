@@ -52,9 +52,9 @@
 	$(document).on('click', '#search', function(e){
 		e.preventDefault();
 		let jsonData = {
-			regStdNo : $('input[name=regStdNo]').val()
+			regStdNo : $('input[name=searchRegStdNo]').val()
 		};
-  		  
+  		//console.log(jsonData);
 		$.ajax({
 			url:'./json/selectRegisterRegStdNoProc.jsp',
 			type:'post',
@@ -96,7 +96,22 @@
  	    	data:jsonData,
  	    	dataType:'json',
  	    	success:function(data){
- 	    		//console.log(data);
+ 	    		console.log(data);
+ 	    		$('.contentTr').remove();
+ 	    		let tag = '';
+ 	    		for(let i=0; i<data.length; i++){
+					tag += "<tr class='contentTr'>";
+					tag += "<td>"+data[i].regStdNo+ "</td>";
+					tag += "<td>"+data[i].stdName+ "</td>";
+					tag += "<td>"+data[i].lecName+ "</td>";
+					tag += "<td>"+data[i].regLecNo+ "</td>";
+					tag += "<td>"+data[i].regMidScore+ "</td>";
+					tag += "<td>"+data[i].regFinalScore+ "</td>";
+					tag += "<td>"+data[i].regTotalScore+ "</td>";
+					tag += "<td>"+data[i].regGrade+ "</td>";
+					tag += "</tr>";
+				}
+				$('table#contentTable').append(tag);
 			},
 		});  
 	});
@@ -112,7 +127,7 @@
 		}
 		
 		$.ajax({
-			url:'./json/insertStudent.jsp',
+			url:'./json/insertStudentProc.jsp',
 			type:'post',
 			data:jsonData,
 			dataType:'json',
