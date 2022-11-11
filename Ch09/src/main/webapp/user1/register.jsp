@@ -8,7 +8,7 @@
 	<body>
 		<h3>user 등록하기</h3>
 		
-		<a href="./list.do">목록보기</a>
+		<a href="/Ch09/user1/list.do">목록보기</a>
 		
 		<form action="#" method="post">
 			<table border="1">

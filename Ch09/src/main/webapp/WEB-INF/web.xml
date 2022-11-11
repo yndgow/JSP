@@ -25,8 +25,6 @@
   	<url-pattern>/*</url-pattern>
   </filter-mapping>
   
-  
-  
   <!-- 모델2 보안설정 -->
   <security-constraint>
   	<display-name>Prohibit Model1</display-name>
@@ -37,5 +35,12 @@
   	<auth-constraint>
   		<role-name>nobody</role-name>
   	</auth-constraint>
+  </security-constraint>
+  
+  <security-constraint>
+  	<web-resource-collection>
+  		<web-resource-name>free pages</web-resource-name>
+  		<url-pattern>/index.jsp</url-pattern>
+  	</web-resource-collection>
   </security-constraint>
 </web-app>

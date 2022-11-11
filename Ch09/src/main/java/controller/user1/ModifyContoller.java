@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import service.user1.ModifyService;
+import dao.User1Dao;
+import vo.User1Vo;
 
 @WebServlet("/user1/modify.do")
 public class ModifyContoller extends HttpServlet{
@@ -24,19 +25,23 @@ public class ModifyContoller extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		requestProc(req, resp);
+		req.setAttribute("vo", User1Dao.getInstance().selectUser(req.getParameter("uid")));
+		
+		RequestDispatcher dispacher = req.getRequestDispatcher("/user1/modify.jsp");
+		dispacher.forward(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		requestProc(req, resp);
-	}
-	
-	private void requestProc(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		ModifyService service = ModifyService.getInstance();
-		String view = service.requestProc(req, resp);
+		User1Vo vo = new User1Vo();
+		vo.setUid(req.getParameter("uid"));
+		vo.setName(req.getParameter("name"));
+		vo.setHp(req.getParameter("hp"));
+		vo.setAge(req.getParameter("age"));
 		
-		RequestDispatcher dispacher = req.getRequestDispatcher(view);
-		dispacher.forward(req, resp);
+		User1Dao.getInstance().updateUser(vo);
+		
+		// 리다이렉트
+		resp.sendRedirect("/Ch09/user1/list.do");
 	}
 }
