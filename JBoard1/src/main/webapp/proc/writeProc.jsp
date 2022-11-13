@@ -18,6 +18,10 @@
 	
 	// multipart 전송 데이터 수신
 	String savePath = application.getRealPath("/file");
+	// 폴더 생성
+	File mdfile = new File(savePath);
+	if(!mdfile.exists()) mdfile.mkdirs();
+	
 	int maxSize = 1024 * 1024 * 10; // 최대 파일 업로드 허용량 10MB
 	DefaultFileRenamePolicy policy = new DefaultFileRenamePolicy();
 	MultipartRequest mr = new MultipartRequest(request, savePath, maxSize, "UTF-8", policy);

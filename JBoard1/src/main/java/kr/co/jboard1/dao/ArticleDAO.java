@@ -93,15 +93,20 @@ public class ArticleDAO {
 			Connection conn = DBCP.getConnection();
 			conn.setAutoCommit(false); // 트랜잭션 시작
 			
-			PreparedStatement psmt = conn.prepareStatement(Sql.INSERT_COMMENT);
+			PreparedStatement psmt1 = conn.prepareStatement(Sql.INSERT_COMMENT);
+			PreparedStatement psmt2 = conn.prepareStatement(Sql.UPDATE_ARTICLE_COMMENT);
+			
 			Statement stmt = conn.createStatement();
 			
-			psmt.setInt(1, comment.getParent());
-			psmt.setString(2, comment.getContent());
-			psmt.setString(3, comment.getUid());
-			psmt.setString(4, comment.getRegip());
+			psmt1.setInt(1, comment.getParent());
+			psmt1.setString(2, comment.getContent());
+			psmt1.setString(3, comment.getUid());
+			psmt1.setString(4, comment.getRegip());
+			psmt1.executeUpdate();
 			
-			psmt.executeUpdate();
+			psmt2.setInt(1, comment.getParent());
+			psmt2.executeUpdate();
+			
 			ResultSet rs = stmt.executeQuery(Sql.SELECT_COMMENT_LATEST);
 			
 			conn.commit(); // 작업확정
@@ -115,7 +120,9 @@ public class ArticleDAO {
 				article.setNick(rs.getString(12));
 			}
 			
-			psmt.close();
+			psmt1.close();
+			psmt2.close();
+			rs.close();
 			conn.close();
 			
 		}catch(Exception e){
@@ -443,28 +450,7 @@ public class ArticleDAO {
 		
 		return result;
 	}
-	
-	// 댓글수 조회
-	public int selectCountComment(String no) {
-		int result = 0;
-		
-		logger.info("Count comment start...");
-		try {
-			Connection conn = DBCP.getConnection();
-			PreparedStatement psmt = conn.prepareStatement(Sql.SELECT_COUNT_COMMENT);
-			
-			
-			
-		}catch(Exception e) {
-			logger.error(e.getMessage());
-		}
-		
-		
-		
-		
-		return result;
-	}
-	
+
 	
 	
 	

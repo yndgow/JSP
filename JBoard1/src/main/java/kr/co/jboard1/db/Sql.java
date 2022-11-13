@@ -103,9 +103,7 @@ public class Sql {
 	// 파일 삭제(DB)
 	public static final String DELETE_FILE = "DELETE FROM `board_file` WHERE `parent` = ?";
 	
-	// 댓글수 조회
-	public static final String SELECT_COUNT_COMMENT = "SELECT COUNT(`parent`) FROM `board_article` WHERE `parent` = ?;";
-	
-	
+	// 댓글수 증가
+	public static final String UPDATE_ARTICLE_COMMENT = "UPDATE `board_article` SET `comment` = `comment`+1 WHERE `no`= ?";
 	
 }
