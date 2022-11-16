@@ -2,8 +2,8 @@
 <%@ include file="../_header.jsp" %>
 
 <main id="user" class="login">
-    <form action="../list.html">
-        <table border="0">
+    <form action="/FarmStory1/user/proc/loginProc.jsp" method="post">
+        <table>
             <tr>
                 <td><img src="./img/login_ico_id.png" alt="로그인"></td>
                 <td><input type="text" name="uid" placeholder="아이디 입력"></td>

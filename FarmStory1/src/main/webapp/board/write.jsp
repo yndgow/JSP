@@ -1,9 +1,20 @@
+<%@page import="kr.co.farmstory1.db.CateEx"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../_header.jsp" %>
+<%
+	String group = request.getParameter("group");
+	String cate = request.getParameter("cate");
+	int result = CateEx.getInstance().exResult(group);
+	pageContext.include("./_"+group+".jsp");
+%>
 <main id="board" class="write">
-    <form action="#">
+    <form action="/FarmStory1/board/proc/writeProc.jsp" method="post">
+    <input type="hidden" name="group" value="<%=group %>">
+    <input type="hidden" name="cate" value="<%=cate %>">
+    <input type="hidden" name="uid" value="<%=sessUser.getUid() %>">
+    
         <table border="0">      
-            <caption>글쓰기</caption>
+            <caption><img src="../img/sub_nav_tit_cate<%=result%>_tit<%=cate%>.png" alt="글쓰기"></caption>
             <tbody>
                 <tr>
                     <th>제목</th>
