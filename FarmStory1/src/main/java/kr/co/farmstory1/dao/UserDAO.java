@@ -106,6 +106,45 @@ public class UserDAO {
 		return ub;
 	}
 	
+	public int selectCountUid(String uid) {
+		int result = 0;
+		try {
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Sql.SELECT_COUNT_UID);
+			psmt.setString(1, uid);
+			ResultSet rs = psmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			rs.close();
+			psmt.close();
+			conn.close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+	
+	public int selectCountNick(String nick) {
+		int result = 0;
+		try {
+			logger.debug("selectCountNick...");
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Sql.SELECT_COUNT_NICK);
+			psmt.setString(1, nick);
+			ResultSet rs = psmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			} 
+			rs.close();
+			psmt.close();
+			conn.close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+	
 	public void selectUsers()	{}
 	public void updateUser()	{}
 	public void deleteUser()	{}

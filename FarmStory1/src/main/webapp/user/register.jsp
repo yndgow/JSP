@@ -1,14 +1,63 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../_header.jsp" %>
+<% request.setCharacterEncoding("utf-8"); %>
+<script>
+	document.addEventListener("DOMContentLoaded", function(){
+		let uidPass = false;
+	    let nickPass = false;
+		
+		const checkUid = document.getElementById("checkUid");
+	    let uid = document.getElementById("uid");
+	    let uidResult = document.getElementsByClassName("uidResult");
+	    checkUid.addEventListener("click", function(){
+	        fetch("./proc/checkUid.jsp?uid="+uid.value)
+	        .then(res => res.json())
+	        .then(function(data){
+	        	uidResult[0].textContent = "......";
+	        	setTimeout(() => {
+	        		if(data.result == 1){
+                		uidResult[0].textContent = "이미 사용중인 아이디입니다.";    
+		        		uidPass = false;
+		        	}else{
+	        			uidResult[0].textContent = "사용가능한 아이디입니다.";    
+		        		uidPass = true;
+		        	}
+                }, 500);
+	        });
+	    });
+	});
+	
+	$(function(){
+	    let pass1 = $('#pass1').val();
+	    let pass2 = $('#pass2').val();
+	    
+	    $('#checkNick').click(function(){
+	    	let nick = $('#nick').val();
+	    	let nickResult = $('.nickResult');
+	    	$.get("./proc/checkNick.jsp?nick="+nick, function(data){
+	    		nickResult.text("......");
+	        	setTimeout(() => {
+	        		if(data.result == 1){
+	        			nickResult.text("이미 사용중인 별명입니다.");    
+		        		uidPass = false;
+		        	}else{
+		        		nickResult.text("사용가능한 별명입니다.");    
+		        		uidPass = true;
+		        	}
+                }, 500);	    		
+	    	});	
+	    });
+	});
+</script>
 <main id="user" class="register">
     <form action="/FarmStory1/user/proc/registerProc.jsp" method="post">
-        <table border="0">
+        <table>
             <caption>사이트 이용정보 입력</caption>
             <tr>
                 <th>아이디</th>
                 <td>
                     <input type="text" id="uid" placeholder="아이디 입력">
-                    <button type="button"><img src="./img/chk_id.gif" alt="중복확인"></button>
+                    <button type="button" id="checkUid"><img src="./img/chk_id.gif" alt="중복확인"></button>
                     <span class="uidResult"></span>
                 </td>
             </tr>
@@ -27,7 +76,7 @@
             </tr>
         </table>
 
-        <table border="0">
+        <table>
             <caption>개인정보 입력</caption>
             <tr>
                 <th>이름</th>
@@ -40,8 +89,8 @@
                 <td>
                     <p>공백없이 한글, 영문, 숫자 입력</p>
                     <input type="text" id="nick" placeholder="별명 입력">
-                    <button type="button"><img src="./img/chk_id.gif" alt=""></button>
-                    <span class="resultNick"></span>
+                    <button type="button" id="checkNick"><img src="./img/chk_id.gif" alt=""></button>
+                    <span class="nickResult"></span>
                 </td>
             </tr>
             <tr>

@@ -23,26 +23,6 @@
             <img src="../img/sub_cate<%=result%>_lnb1.png" alt="" />
           </a>
         </li>
-        <li class="<%=cate.equals("2") ? "on" : "off" %>">
-          <a href="./list.jsp?group=<%=group%>&cate=2">
-            <img src="../img/sub_cate<%=result%>_lnb2.png" alt="" />
-          </a>
-        </li>
-        <li class="<%=cate.equals("3") ? "on" : "off" %>">
-          <a href="./list.jsp?group=<%=group%>&cate=3">
-            <img src="../img/sub_cate<%=result%>_lnb3.png" alt="" />
-          </a>
-        </li>
-        <li class="<%=cate.equals("4") ? "on" : "off" %>">
-          <a href="./list.jsp?group=<%=group%>&cate=4">
-            <img src="../img/sub_cate<%=result%>_lnb4.png" alt="" />
-          </a>
-        </li>
-        <li class="<%=cate.equals("5") ? "on" : "off" %>">
-          <a href="./list.jsp?group=<%=group%>&cate=5">
-            <img src="../img/sub_cate<%=result%>_lnb5.png" alt="" />
-          </a>
-        </li>
       </ul>
     </aside>
     <article>

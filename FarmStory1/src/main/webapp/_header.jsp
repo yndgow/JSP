@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="/FarmStory1/board/css/style.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    
+    <script src="/FarmStory1/js/recent.js"></script>
 	
 	
 	<script>

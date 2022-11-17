@@ -6,36 +6,8 @@
 <%
 	ArticleDAO dao = ArticleDAO.getInstance();
 	List<ArticleBean> latests = dao.selectLatest();
-
 %>
-<script>
-	$(function(){
- 		$.get('/FarmStory1/board/proc/getLatestProc.jsp?cate=notice', function(data){
-			$('#tabs-1 .loading').remove();
-			for(let latest of data){
-				let url = '/FarmStory1/board/view.jsp?group=community&cate=notice&pg=1&no='+latest.no;
-				$('#tabs-1 .txt').append("<li><a href='"+url+"'>"+latest.title+"</a></li>");
-			}
-		});
-		
- 		$.get('/FarmStory1/board/proc/getLatestProc.jsp?cate=qna', function(data){
-			$('#tabs-2 .loading').remove();
-			for(let latest of data){
-				let url = '/FarmStory1/board/view.jsp?group=community&cate=qna&pg=1&no='+latest.no;
-				$('#tabs-2 .txt').append("<li><a href='"+url+"'>"+latest.title+"</a></li>");
-			}
-		});
-		
-		$.get('/FarmStory1/board/proc/getLatestProc.jsp?cate=faq', function(data){
-			$('#tabs-3 .loading').remove();
-			for(let latest of data){
-				let url = '/FarmStory1/board/view.jsp?group=community&cate=faq&pg=1&no='+latest.no;
-				$('#tabs-3 .txt').append("<li><a href='"+url+"'>"+latest.title+"</a></li>");
-			}
-		}); 
-			
-	});
-</script>
+
 <main>
   <div class="slider">
     <img src="img/main_slide_img_tit.png" alt="팜스토리" />
@@ -70,7 +42,7 @@
         <tr>
           <td>></td>
           <td>
-            <a href="/FarmStory1/board/view.jsp?group=croptalk&cate=grow&pg=1&no=<%=lt.getNo()%>"><%=lt.getTitle()%></a>
+            <a href="/FarmStory1/board/view.jsp?group=croptalk&cate=2&pg=1&no=<%=lt.getNo()%>"><%=lt.getTitle()%></a>
           </td>
           <td><%= lt.getRdate() %></td>
         </tr>
@@ -86,7 +58,7 @@
         <tr>
           <td>></td>
           <td>
-            <a href="/FarmStory1/board/view.jsp?group=croptalk&cate=school&pg=1&no=<%=lt.getNo()%>"><%=lt.getTitle()%></a>
+            <a href="/FarmStory1/board/view.jsp?group=croptalk&cate=3&pg=1&no=<%=lt.getNo()%>"><%=lt.getTitle()%></a>
           </td>
           <td><%= lt.getRdate() %></td>
         </tr>
@@ -102,7 +74,7 @@
         <tr>
           <td>></td>
           <td>
-            <a href="/FarmStory1/board/view.jsp?group=croptalk&cate=story&pg=1&no=<%=lt.getNo()%>"><%=lt.getTitle()%></a>
+            <a href="/FarmStory1/board/view.jsp?group=croptalk&cate=1&pg=1&no=<%=lt.getNo()%>"><%=lt.getTitle()%></a>
           </td>
           <td><%= lt.getRdate() %></td>
         </tr>
