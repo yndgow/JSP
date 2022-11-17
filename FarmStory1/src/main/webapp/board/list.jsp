@@ -76,14 +76,14 @@
 		
 		       <div class="page">
                 	<% if(pageGroupStart > 1) { %>
-                    <a href="/FarmStroy1/list.jsp?pg=<%= pageGroupStart - 1 %>" class="prev">이전</a>
+                    <a href="/FarmStory1/board/list.jsp?pg=<%= pageGroupStart - 1 %>" class="prev">이전</a>
                     <% } %>
                     <% for(int num = pageGroupStart; num <= pageGroupEnd; num++) { %>
-                    <a href="/FarmStroy1/list.jsp?group=<%=group%>&cate=<%=cate%>&pg=<%=num %>" class="num <%= (num == currentPage)? "current" : "off" %>"><%= num %></a>
+                    <a href="/FarmStory1/board/list.jsp?group=<%=group%>&cate=<%=cate%>&pg=<%=num %>" class="num <%= (num == currentPage)? "current" : "off" %>"><%= num %></a>
                     <% } %>
                     
                     <% if(pageGroupEnd < lastPageNum) { %>
-                    <a href="/FarmStroy1/list.jsp?group=<%=group%>&cate=<%=cate%>&pg=<%= pageGroupEnd + 1 %>" class="next">다음</a>
+                    <a href="/FarmStory1/board/list.jsp?group=<%=group%>&cate=<%=cate%>&pg=<%= pageGroupEnd + 1 %>" class="next">다음</a>
                     <% } %>
                 </div>
 		    <div>

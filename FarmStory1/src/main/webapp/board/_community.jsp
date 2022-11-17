@@ -1,13 +1,8 @@
+<%@page import="kr.co.farmstory1.db.CateEx"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	String group = request.getParameter("group");
-	String [] arr = {"introduce","market","croptalk", "event", "community"};
-	int result = 0;
-	for(int i=0; i<arr.length; i++){
-		if(arr[i].equals(group)){
-			result = i+1;	
-		}
-	}
+	int result = CateEx.getInstance().exResult(group);
 	String cate = request.getParameter("cate");
 %>
 <div id="sub">

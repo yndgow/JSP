@@ -2,10 +2,17 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../_header.jsp" %>
 <%
+	
+	if(sessUser == null){
+		response.sendRedirect("/FarmStory1/user/login.jsp?success=101");
+		return;
+	}
+	
 	String group = request.getParameter("group");
 	String cate = request.getParameter("cate");
 	int result = CateEx.getInstance().exResult(group);
 	pageContext.include("./_"+group+".jsp");
+	
 %>
 <main id="board" class="write">
     <form action="/FarmStory1/board/proc/writeProc.jsp" method="post">

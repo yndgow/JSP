@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../_header.jsp" %>
-
 <main id="user" class="login">
     <form action="/FarmStory1/user/proc/loginProc.jsp" method="post">
         <table>

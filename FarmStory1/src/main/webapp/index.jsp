@@ -1,5 +1,41 @@
+<%@page import="kr.co.farmstory1.bean.ArticleBean"%>
+<%@page import="java.util.List"%>
+<%@page import="kr.co.farmstory1.dao.ArticleDAO"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp" %>
+<%
+	ArticleDAO dao = ArticleDAO.getInstance();
+	List<ArticleBean> latests = dao.selectLatest();
+
+%>
+<script>
+	$(function(){
+ 		$.get('/FarmStory1/board/proc/getLatestProc.jsp?cate=notice', function(data){
+			$('#tabs-1 .loading').remove();
+			for(let latest of data){
+				let url = '/FarmStory1/board/view.jsp?group=community&cate=notice&pg=1&no='+latest.no;
+				$('#tabs-1 .txt').append("<li><a href='"+url+"'>"+latest.title+"</a></li>");
+			}
+		});
+		
+ 		$.get('/FarmStory1/board/proc/getLatestProc.jsp?cate=qna', function(data){
+			$('#tabs-2 .loading').remove();
+			for(let latest of data){
+				let url = '/FarmStory1/board/view.jsp?group=community&cate=qna&pg=1&no='+latest.no;
+				$('#tabs-2 .txt').append("<li><a href='"+url+"'>"+latest.title+"</a></li>");
+			}
+		});
+		
+		$.get('/FarmStory1/board/proc/getLatestProc.jsp?cate=faq', function(data){
+			$('#tabs-3 .loading').remove();
+			for(let latest of data){
+				let url = '/FarmStory1/board/view.jsp?group=community&cate=faq&pg=1&no='+latest.no;
+				$('#tabs-3 .txt').append("<li><a href='"+url+"'>"+latest.title+"</a></li>");
+			}
+		}); 
+			
+	});
+</script>
 <main>
   <div class="slider">
     <img src="img/main_slide_img_tit.png" alt="팜스토리" />
@@ -8,6 +44,7 @@
     <img src="img/main_banner_tit.png" alt="그랜드오픈" />
     <img src="img/main_banner_txt.png" alt="오픈기념" />
   </div>
+  
   <div class="quick">
     <div id="sub1">
       <a href="">
@@ -22,131 +59,58 @@
       </a>
     </div>
   </div>
+  
   <div class="latest">
     <div>
       <img src="img/main_latest1_tit.png" alt="" />
       <img src="img/main_latest1_img.jpg" alt="" />
       <table>
+      	<%for(int i=0; i<5; i++){ 
+      		ArticleBean lt = latests.get(i);%>
         <tr>
           <td>></td>
           <td>
-            <a href="#">토마토!건강하게 길러길러 건강하게 길러길러</a>
+            <a href="/FarmStory1/board/view.jsp?group=croptalk&cate=grow&pg=1&no=<%=lt.getNo()%>"><%=lt.getTitle()%></a>
           </td>
-          <td>20-12-22</td>
+          <td><%= lt.getRdate() %></td>
         </tr>
-        <tr>
-          <td>></td>
-          <td>
-            <a href="#">토마토!건강하게 길러길러 건강하게 길러길러</a>
-          </td>
-          <td>20-12-22</td>
-        </tr>
-        <tr>
-          <td>></td>
-          <td>
-            <a href="#">토마토!건강하게 길러길러 건강하게 길러길러</a>
-          </td>
-          <td>20-12-22</td>
-        </tr>
-        <tr>
-          <td>></td>
-          <td>
-            <a href="#">토마토!건강하게 길러길러 건강하게 길러길러</a>
-          </td>
-          <td>20-12-22</td>
-        </tr>
-        <tr>
-          <td>></td>
-          <td>
-            <a href="#">토마토!건강하게 길러길러 건강하게 길러길러</a>
-          </td>
-          <td>20-12-22</td>
-        </tr>
+        <%} %>
       </table>
     </div>
     <div>
       <img src="img/main_latest2_tit.png" alt="" />
       <img src="img/main_latest2_img.jpg" alt="" />
       <table>
+       <%for(int i=5; i<10; i++){ 
+      		ArticleBean lt = latests.get(i);%>
         <tr>
           <td>></td>
           <td>
-            <a href="#">토마토!건강하게 길러길러 건강하게 길러길러</a>
+            <a href="/FarmStory1/board/view.jsp?group=croptalk&cate=school&pg=1&no=<%=lt.getNo()%>"><%=lt.getTitle()%></a>
           </td>
-          <td>20-12-22</td>
+          <td><%= lt.getRdate() %></td>
         </tr>
-        <tr>
-          <td>></td>
-          <td>
-            <a href="#">토마토!건강하게 길러길러 건강하게 길러길러</a>
-          </td>
-          <td>20-12-22</td>
-        </tr>
-        <tr>
-          <td>></td>
-          <td>
-            <a href="#">토마토!건강하게 길러길러 건강하게 길러길러</a>
-          </td>
-          <td>20-12-22</td>
-        </tr>
-        <tr>
-          <td>></td>
-          <td>
-            <a href="#">토마토!건강하게 길러길러 건강하게 길러길러</a>
-          </td>
-          <td>20-12-22</td>
-        </tr>
-        <tr>
-          <td>></td>
-          <td>
-            <a href="#">토마토!건강하게 길러길러 건강하게 길러길러</a>
-          </td>
-          <td>20-12-22</td>
-        </tr>
+        <%} %>
       </table>
     </div>
     <div>
       <img src="img/main_latest3_tit.png" alt="" />
       <img src="img/main_latest3_img.jpg" alt="" />
       <table>
+        <%for(int i=10; i<15; i++){ 
+      		ArticleBean lt = latests.get(i);%>
         <tr>
           <td>></td>
           <td>
-            <a href="#">토마토!건강하게 길러길러 건강하게 길러길러</a>
+            <a href="/FarmStory1/board/view.jsp?group=croptalk&cate=story&pg=1&no=<%=lt.getNo()%>"><%=lt.getTitle()%></a>
           </td>
-          <td>20-12-22</td>
+          <td><%= lt.getRdate() %></td>
         </tr>
-        <tr>
-          <td>></td>
-          <td>
-            <a href="#">토마토!건강하게 길러길러 건강하게 길러길러</a>
-          </td>
-          <td>20-12-22</td>
-        </tr>
-        <tr>
-          <td>></td>
-          <td>
-            <a href="#">토마토!건강하게 길러길러 건강하게 길러길러</a>
-          </td>
-          <td>20-12-22</td>
-        </tr>
-        <tr>
-          <td>></td>
-          <td>
-            <a href="#">토마토!건강하게 길러길러 건강하게 길러길러</a>
-          </td>
-          <td>20-12-22</td>
-        </tr>
-        <tr>
-          <td>></td>
-          <td>
-            <a href="#">토마토!건강하게 길러길러 건강하게 길러길러</a>
-          </td>
-          <td>20-12-22</td>
-        </tr>
+        <%} %>
       </table>
     </div>
   </div>
+  
   <div class="info">
     <div>
       <img src="img/main_sub2_cs_tit.png" alt="" />
@@ -171,13 +135,30 @@
         예 금 주 (주)팜스토리
       </p>
     </div>
-    <div id="tabDiv">
-      <ul class="tab">
-        <li class="tab1 onTab">공지사항</li>
-        <li class="tab2">1:1고객문의</li>
-        <li class="tab3">자주묻는 질문</li>
-      </ul>
-    </div>
+    <div>
+		<div id="tabs">
+		    <ul>
+		        <li><a href="#tabs-1">공지사항</a></li>
+		        <li><a href="#tabs-2">1:1 고객문의</a></li>
+		        <li><a href="#tabs-3">자주묻는 질문</a></li>
+		    </ul>
+		    <div id="tabs-1">
+		        <ul class="txt">
+		            <img src="./img/loading.gif" class="loading">
+		        </ul>
+		    </div>
+		    <div id="tabs-2">
+		        <ul class="txt">
+		            <img src="./img/loading.gif" class="loading">
+		        </ul>
+		    </div>
+		    <div id="tabs-3">
+		        <ul class="txt">
+		            <img src="./img/loading.gif" class="loading">
+		        </ul>
+		    </div>
+		</div>
+	</div>
   </div>
 </main>
 <%@ include file="./_footer.jsp" %>

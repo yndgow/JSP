@@ -2,16 +2,40 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
+	request.setCharacterEncoding("UTF-8");
+	String success = request.getParameter("success");
 	UserBean sessUser = (UserBean)session.getAttribute("sessUser");
+
 %>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <title>팜스토리::메인</title>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"/>
     <link rel="stylesheet" href="/FarmStory1/css/style.css" />
     <link rel="stylesheet" href="/FarmStory1/user/css/style.css" />
     <link rel="stylesheet" href="/FarmStory1/board/css/style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    
+	
+	
+	<script>
+		$(function(){
+			$('#tabs').tabs();
+		});
+	
+	  	let success = "<%=success%>";
+		if(success == '100'){
+			alert('일치하는 회원이 없습니다.\n아이디, 비밀번호를 다시 확인하시기 바랍니다.');
+			location.href = '/FarmStory1/user/login.jsp';
+		}else if(success == '101'){
+			alert('로그인하셔야합니다.');
+			location.href = '/FarmStory1/user/login.jsp';
+		}
+	</script>
   </head>
   <body>
     <div id="wrapper">
