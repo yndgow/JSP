@@ -10,7 +10,7 @@
 	String email 	= request.getParameter("email");
 	String hp 		= request.getParameter("hp");
 	String grade 	= request.getParameter("grade");
-	//String zip 		= request.getParameter("zip");
+	String zip 		= request.getParameter("zip");
 	String addr1 	= request.getParameter("addr1");
 	String addr2 	= request.getParameter("addr2");
 	String regip 	= request.getRemoteAddr();
