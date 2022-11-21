@@ -10,7 +10,7 @@
 </head>
 <body>
 	<h3>user4 목록</h3>
-    <a href="/Ch09/user4/register.do">등록으로</a>
+    <a href="/Ch09/user4/register.jsp">등록으로</a>
 	<table border="1">
 		<tr>
             <th>번호</th>
@@ -36,8 +36,8 @@
            <td>${user.age}</td>
            <td>${user.addr}</td>
            <td>
-			<a href="/Ch09/user4/modify.do?seq=${user.seq}">수정</a>
-           	<a href="/Ch09/user4/delete.do?seq=${user.seq}">삭제</a>
+			<a href="/Ch09/user4/modify.jsp?seq=${user.seq}">수정</a>
+           	<a href="/Ch09/user4/delete.jsp?seq=${user.seq}">삭제</a>
            </td>
         </tr>
         </c:forEach>

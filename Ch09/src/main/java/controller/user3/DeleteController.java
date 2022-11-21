@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.User3Dao;
 
-@WebServlet("/user3/delete.do")
+@WebServlet("/user3/delete.jsp")
 public class DeleteController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	
@@ -21,6 +21,6 @@ public class DeleteController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		User3Dao.getInstance().deleteUser(req.getParameter("uid"));
-		resp.sendRedirect("/Ch09/user3/list.do");
+		resp.sendRedirect("/Ch09/user3/list.jsp");
 	}
 }

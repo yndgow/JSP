@@ -56,7 +56,7 @@
           <a href="#">고객센터</a>
         </p>
         <ul class="gnb">
-          <li><a href="/FarmStory1/introduction/hello.jsp">팜스토리소개</a></li>
+          <li><a href="/FarmStory1/introduction/hello.jsp?group=introduction&cate=1">팜스토리소개</a></li>
           <li><a href="/FarmStory1/board/list.jsp?group=market&cate=1">장보기</a><img src="/FarmStory1/img/head_menu_badge.png" alt="" /></li>
           <li><a href="/FarmStory1/board/list.jsp?group=croptalk&cate=1">농작물이야기</a></li>
           <li><a href="/FarmStory1/board/list.jsp?group=event&cate=1">이벤트</a></li>

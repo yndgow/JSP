@@ -9,13 +9,13 @@
 		<h3>모델3 실습</h3>
 		
 		<h4>기본 MVC</h4>
-		<a href="./hello.do">hello</a>
-		<a href="./welcome.do">welcome</a>
-		<a href="./greeting.do">greeting</a>
+		<a href="./hello.jsp">hello</a>
+		<a href="./welcome.jsp">welcome</a>
+		<a href="./greeting.jsp">greeting</a>
 		
 		<h4>user1 실습</h4>
-		<a href="/Ch09/user1/list.do">list</a>
-		<a href="/Ch09/user1/modify.do">modify</a>
-		<a href="/Ch09/user1/register.do">register</a>
+		<a href="/Ch09/user1/list.jsp">list</a>
+		<a href="/Ch09/user1/modify.jsp">modify</a>
+		<a href="/Ch09/user1/register.jsp">register</a>
 	</body>
 </html>

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import dao.User4Dao;
 import vo.User4Vo;
 
-@WebServlet("/user4/modify.do")
+@WebServlet("/user4/modify.jsp")
 public class ModifyController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	
@@ -37,7 +37,7 @@ public class ModifyController extends HttpServlet{
 		vo.setSeq(req.getParameter("seq"));
 		
 		User4Dao.getInstance().updateUser(vo);
-		resp.sendRedirect("/Ch09/user4/list.do");
+		resp.sendRedirect("/Ch09/user4/list.jsp");
 	}
 
 }

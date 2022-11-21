@@ -8,9 +8,9 @@
 	<body>
 		<h3>user 등록하기</h3>
 		
-		<a href="/Ch09/user3/list.do">목록보기</a>
+		<a href="/Ch09/user3/list.jsp">목록보기</a>
 		
-		<form action="/Ch09/user3/register.do" method="post">
+		<form action="/Ch09/user3/register.jsp" method="post">
 			<table border="1">
 				<tr>
 					<td>아이디</td>

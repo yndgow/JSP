@@ -13,7 +13,7 @@ import dao.User3Dao;
 import vo.User3Vo;
 
 
-@WebServlet("/user3/modify.do")
+@WebServlet("/user3/modify.jsp")
 public class ModifyController extends HttpServlet{
 	
 	private static final long serialVersionUID = 1L;
@@ -42,7 +42,7 @@ public class ModifyController extends HttpServlet{
 		
 		User3Dao.getInstance().updateUser(vo);
 		
-		resp.sendRedirect("/Ch09/user3/list.do");
+		resp.sendRedirect("/Ch09/user3/list.jsp");
 	}
 
 }

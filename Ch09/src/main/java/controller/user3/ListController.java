@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import dao.User3Dao;
 
 
-@WebServlet("/user3/list.do")
+@WebServlet("/user3/list.jsp")
 public class ListController extends HttpServlet{
 	
 	private static final long serialVersionUID = 1L;

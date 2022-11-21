@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import dao.User3Dao;
 import vo.User3Vo;
 
-@WebServlet("/user3/register.do")
+@WebServlet("/user3/register.jsp")
 public class RegisterController extends HttpServlet{
 	
 	private static final long serialVersionUID = 1L;
@@ -37,6 +37,6 @@ public class RegisterController extends HttpServlet{
 		
 		User3Dao.getInstance().insertUser(user);
 		
-		resp.sendRedirect("/Ch09/user3/list.do");
+		resp.sendRedirect("/Ch09/user3/list.jsp");
 	}
 }

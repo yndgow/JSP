@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.User4Dao;
 
-@WebServlet("/user4/list.do")
+@WebServlet("/user4/list.jsp")
 public class ListController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	

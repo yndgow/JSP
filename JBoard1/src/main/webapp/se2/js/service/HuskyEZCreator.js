@@ -80,14 +80,14 @@ nhn.husky.EZCreator = new (function(){
 		attachEvent(elIFrame, "load", function(){
 			fCreator = elIFrame.contentWindow[fCreator] || elIFrame.contentWindow.createSEditor2;
 			
-//			top.document.title = ((new Date())-window.STime);
+//			top.jspcument.title = ((new Date())-window.STime);
 //			window.STime = new Date();
 			
 			try{
-				nEditorHeight = elIFrame.contentWindow.document.body.scrollHeight + 12;
+				nEditorHeight = elIFrame.contentWindow.jspcument.body.scrollHeight + 12;
 				elIFrame.style.width =  "100%";
 				elIFrame.style.height = nEditorHeight+ "px";
-				elIFrame.contentWindow.document.body.style.margin = "0";
+				elIFrame.contentWindow.jspcument.body.style.margin = "0";
 			}catch(e){
 				nhn.husky.EZCreator.hideBlocker(true);
 				elIFrame.style.border = "5px solid red";
@@ -109,7 +109,7 @@ nhn.husky.EZCreator = new (function(){
 
 			oApp.run({fnOnAppReady:fOnAppLoad}); 
 			
-//			top.document.title += ", "+((new Date())-window.STime);
+//			top.jspcument.title += ", "+((new Date())-window.STime);
 			nhn.husky.EZCreator.hideBlocker();
 		});
 //		window.STime = new Date();

@@ -32,6 +32,11 @@ public class CateEx {
 			case "4" : cate2 = "qna";break;
 			case "5" : cate2 = "faq";break;
 			}
+		}else if(group.equals("introduction")) {
+			switch(cate){
+			case "1" : cate2 = "hello";break;
+			case "2" : cate2 = "direction";break;
+			}
 		}
 		return cate2;
 	}

@@ -10,8 +10,8 @@
   </head>
   <body>
     <h3>user4 등록</h3>
-    <a href="/Ch09/user4/list.do">목록으로</a>
-    <form action="/Ch09/user4/register.do" method="post">
+    <a href="/Ch09/user4/list.jsp">목록으로</a>
+    <form action="/Ch09/user4/register.jsp" method="post">
       <table border="1">
         <tr>
           <th>이름</th>
