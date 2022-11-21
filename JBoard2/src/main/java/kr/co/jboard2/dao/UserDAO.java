@@ -45,31 +45,24 @@ public class UserDAO extends DBHelper {
 	}
 	
 	public TermsVO selectTerms() {
-		
 		TermsVO vo = null;
 		try {
 			logger.info("selectTerms start...");
-			
 			conn = getConnection();
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(Sql.SELECT_TERMS);
-			
 			if(rs.next()) {
 				vo = new TermsVO();
 				vo.setTerms(rs.getString(1));
 				vo.setPrivacy(rs.getString(2));
 			}
-			
 			close();
-			
 		}catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		
 		logger.debug("vo : " + vo);
 		return vo;
 	}
-	
 	
 	public int selectCountUid(String uid)	{
 		int result = 0; 
@@ -79,9 +72,7 @@ public class UserDAO extends DBHelper {
 			psmt = conn.prepareStatement(Sql.SELECT_COUNT_UID);
 			psmt.setString(1, uid);
 			rs = psmt.executeQuery();
-			if(rs.next()) {
-				result = rs.getInt(1);
-			}
+			if(rs.next()) result = rs.getInt(1);
 			close();
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -98,9 +89,7 @@ public class UserDAO extends DBHelper {
 			psmt = conn.prepareStatement(Sql.SELECT_COUNT_NICK);
 			psmt.setString(1, nick);
 			rs = psmt.executeQuery();
-			if(rs.next()) {
-				result = rs.getInt(1);
-			}
+			if(rs.next()) result = rs.getInt(1);
 			close();
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -109,8 +98,23 @@ public class UserDAO extends DBHelper {
 		return result;
 	}
 	
-	public void selectUser() {
-		 
+	public int selectUser(String uid, String pass) {
+		int result = 0;
+		try {
+			logger.info("selectUser...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.SELECT_USER);
+			psmt.setString(1, uid);
+			psmt.setString(2, pass);
+			rs = psmt.executeQuery();
+			if(rs.next()) result = rs.getInt(1);
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("result : " + result);
+		return result;
+		
 	}
 	public void selectUsers() {}
 	public void updateUser() {}

@@ -1,6 +1,18 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="./_header.jsp"/>
 <script>
+$(()=>{
+	$('.btnNext').click((e)=>{
+		let isTermsOK = false;
+		let isPraivacyOK = false;
+		if($('.terms').is(':checked')) isTermsOK = true;
+		if($('.privacy').is(':checked')) isPraivacyOK = true;
+		if(!(isTermsOK && isPraivacyOK)){
+			alert('모두 동의하셔야합니다.');
+			e.preventDefault();
+		}
+	});
+});
 
 </script>
         <main id="user">
