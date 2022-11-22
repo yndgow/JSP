@@ -1,9 +1,16 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="./_header.jsp"/>
+<script>
+ let success = ${requestScope.success};
+ switch (success) {
+	case 100 : alert('회원정보가 일치하지 않습니다.\n 회원이 아니시라면 회원가입해주세요.');break;
+	case 201 : alert('로그아웃 되었습니다.'); break;
+}
+</script>
         <main id="user">
             <section class="login">
-                <form action="/user/login.do" method="post">
-                    <table border="0">
+                <form action="/JBoard2/user/login.do" method="post">
+                    <table>
                         <tr>
                             <td><img src="../img/login_ico_id.png" alt="아이디"/></td>
                             <td><input type="text" name="uid" placeholder="아이디 입력"/></td>

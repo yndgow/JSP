@@ -2,8 +2,8 @@
 <jsp:include page="./_header.jsp"/>
         <main id="user">
             <section class="find findId">
-                <form action="#">
-                    <table border="0">
+                <form action="/JBoard2/user/findIdResult.do">
+                    <table>
                         <caption>아이디 찾기</caption>
                         <tr>
                             <td>이름</td>
@@ -31,8 +31,8 @@
                 </p>
 
                 <div>
-                    <a href="./login.html" class="btn btnCancel">취소</a>
-                    <a href="./findIdResult.html" class="btn btnNext">다음</a>
+                    <a href="./login.do" class="btn btnCancel">취소</a>
+                    <a href="./findIdResult.do" class="btn btnNext">다음</a>
                 </div>
             </section>
         </main>

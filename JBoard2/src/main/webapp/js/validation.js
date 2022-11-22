@@ -13,6 +13,11 @@ let isNameOK 	= false;
 let isNickOK 	= false;
 let isEmailOK 	= false;
 let isHpOK 		= false;
+let isEmailValiOK = false;
+let isEmailAuthOK = false;
+
+// 이메일 인증코드
+let receiveCode = 0;
 
 $(function(){
 	// 아이디 중복 검사
@@ -108,15 +113,78 @@ $(function(){
 	
 	// 이메일 유효성 검사
 	$('input[name=email]').focusout(function(){
+		
 		let email = $(this).val();
 		
 		if(!email.match(regEmail)){
-			isEmailOK = false;
+			isEmailValiOK = false;
 			$('.emailResult').css('color', 'red').text('이메일이 유효하지 않습니다.');
 		}else{
-			isEmailOK = true;
+			isEmailValiOK = true;
 			$('.emailResult').text('');
 		}
+	});
+	$('input[name=email]').keydown(()=>{
+		isEmailOK = false;
+		$('.emailResult').text('');
+	});
+	
+	// 이메일 인증
+	$('#btnEmail, .btnAuth').click(function(){
+		
+		if(isEmailOK) return false; // 인증 성공 비활성화
+		if(!isEmailValiOK) return false; // 유효성 실패 비활성화
+		let email = $('input[name=email]').val();
+		if(email == ''){
+			alert('이메일을 입력하세요');
+		} 
+		if($('.btnAuth')){
+			alert();
+		}		
+		$('.emailResult').text('인증코드 전송 중 입니다. 잠시만 기다려주세요.');
+	
+		setTimeout(() => {
+			$.ajax({
+				url:'/JBoard2/user/emailAuth.do',
+				method:'GET',
+				data:{"email":email},
+				dataType:'json',
+				success:(data)=>{
+					if(data.status > 0) // 메일전송 성공
+					{
+						$('.auth').show();
+						$('.emailResult').text('이메일을 확인후 인증코드를 입력하세요.');
+						isEmailAuthOK = true;
+						receiveCode = data.code;
+					}
+					else  // 메일전송 실패
+					{
+						isEmailOK = false;
+						alert('메일 전송이 실패했습니다. \n 다시 시도 하시기 바랍니다.');
+					}
+				}
+			});	
+		}, 1000);
+	});
+		
+	// 인증번호 확인
+	$('#btnAuth').click(()=>{
+		if(!isEmailAuthOK) return false;
+		if(isEmailOK) return false;
+		let result = $('input[name=auth]').val();
+		$('.emailResult').text('...');
+		setTimeout(() => {
+			if(result == receiveCode){
+				$('.auth, #btnEmail').hide();
+				$('.emailResult').css('color','blue').text('이메일이 인증되었습니다.');
+				$('input[name=email]').attr('readonly', true);
+				isEmailOK = true;
+			}
+			else{
+				$('.emailResult').text('인증에 실패하였습니다.');
+				isEmailOK = false;
+			}
+		}, 500);
 	});
 	
 	// 휴대폰 유효성 검사
@@ -161,7 +229,23 @@ $(function(){
 			alert('휴대폰을 확인하세요.')
 			return false;
 		}
+		
 		// 최종 통과
+		alert('회원가입해주셔서 감사합니다. 로그인해주시기바랍니다.');
+		return true;
+	});
+	
+	// 아이디찾기 유효성 검사
+	$('.btnNext').click(()=>{
+		if(!isNameOK){
+			alert('이름을 확인하세요.');
+			return false;
+		}
+		if(!isEmailOK){
+			alert('이메일을 확인하세요.');
+			return false;
+		}
+		$('.findId > form').submit();		
 		return true;
 	});
 });
