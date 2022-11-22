@@ -130,19 +130,24 @@ $(function(){
 	});
 	
 	// 이메일 인증
-	$('#btnEmail, .btnAuth').click(function(){
-		
+	$('#btnEmail').click(emailAuth);
+	$('.btnAuth').click(()=>{
+		emailAuth('auth');
+	});
+	
+	
+	function emailAuth (btnName) {
 		if(isEmailOK) return false; // 인증 성공 비활성화
 		if(!isEmailValiOK) return false; // 유효성 실패 비활성화
+		// 인증 실패 연속 시도 금지
 		let email = $('input[name=email]').val();
 		if(email == ''){
 			alert('이메일을 입력하세요');
-		} 
-		if($('.btnAuth')){
-			alert();
+		}
+		if(btnName === 'auth' ){
+			$('input[name=auth]').attr('disabled', true);
 		}		
 		$('.emailResult').text('인증코드 전송 중 입니다. 잠시만 기다려주세요.');
-	
 		setTimeout(() => {
 			$.ajax({
 				url:'/JBoard2/user/emailAuth.do',
@@ -165,10 +170,12 @@ $(function(){
 				}
 			});	
 		}, 1000);
-	});
+	}
+		
+		
 		
 	// 인증번호 확인
-	$('#btnAuth').click(()=>{
+	$('#btnAuth, .btnConfirm').click(()=>{
 		if(!isEmailAuthOK) return false;
 		if(isEmailOK) return false;
 		let result = $('input[name=auth]').val();
