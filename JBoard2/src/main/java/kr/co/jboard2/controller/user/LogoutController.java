@@ -18,13 +18,17 @@ public class LogoutController extends HttpServlet{
 	public void init() throws ServletException {}
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// 세션 초기화
 		HttpSession session= req.getSession();
 		session.removeAttribute("sessUser");
 		session.invalidate();
-		Cookie cookies[] = req.getCookies();
+		// 쿠키 초기화
+		Cookie[] cookies = req.getCookies();
 		for(Cookie cookie : cookies) {
-			if(cookie.getName() == "cookieUser") {
+			if(cookie.getName().equals("cookieUser")) {
 				cookie.setMaxAge(0);
+				cookie.setPath("/");
+				resp.addCookie(cookie);
 				break;
 			}
 		}

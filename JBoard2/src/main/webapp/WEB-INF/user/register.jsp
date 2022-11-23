@@ -48,7 +48,6 @@
                 <tr>
                     <td>이메일</td>
                     <td>
-                        
                         <input type="email" name="email" placeholder="이메일 입력"/>
                         <button type="button" id="btnEmail"><img src="../img/chk_auth.gif" alt="인증번호 받기"/></button>
                         <div class="auth">

@@ -228,6 +228,10 @@ footer > p {
     display: none;
     margin-top: 6px;
 }
+.emailResult, .passResult{
+	font-size: 11px;
+}
+
 
 /* 글목록 */
 #board > .list {
