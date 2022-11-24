@@ -35,8 +35,8 @@ public class WriteController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String savePath = req.getServletContext().getRealPath("/file");
-		//File mdfile = new File(savePath);
-		//if(!mdfile.exists()) mdfile.mkdirs();
+		File mdfile = new File(savePath);
+		if(!mdfile.exists()) mdfile.mkdirs();
 		
 		int maxSize = 1024 * 1024 * 10;
 		

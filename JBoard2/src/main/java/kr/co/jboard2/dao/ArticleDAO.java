@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import kr.co.jboard2.db.DBHelper;
 import kr.co.jboard2.db.Sql;
 import kr.co.jboard2.vo.ArticleVO;
+import kr.co.jboard2.vo.FileVO;
 
 public class ArticleDAO extends DBHelper{
 	private static ArticleDAO instance = new ArticleDAO();
@@ -80,6 +81,30 @@ public class ArticleDAO extends DBHelper{
 			logger.error(e.getMessage());
 		}
 		logger.debug("vo : " + vo);
+		return vo;
+	}
+	
+	public FileVO selectFile(String fno) {
+		FileVO vo = null;
+		try {
+			logger.info("selectFile...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.SELECT_FILE);
+			psmt.setString(1, fno);
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				vo = new FileVO();
+				vo.setFno(rs.getInt(1));
+				vo.setParent(rs.getInt(2));
+				vo.setNewName(rs.getString(3));
+				vo.setOriName(rs.getString(4));
+				vo.setDownload(rs.getInt(5));
+				vo.setRdate(rs.getString(6));
+			}
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
 		return vo;
 	}
 	
@@ -157,6 +182,22 @@ public class ArticleDAO extends DBHelper{
 	
 	
 	public void updateArticle() {}
+	
+	public void updateFileDownload(String fno) {
+		int result = 0;
+		try {
+			logger.info("updateFileDownload...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.UPDATE_FILE_DOWNLOAD);
+			psmt.setString(1, fno);
+			result = psmt.executeUpdate();
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("result : " + result);
+	}
+	
 	public void deleteArticle() {}
 	
 	
