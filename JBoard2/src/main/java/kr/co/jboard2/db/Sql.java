@@ -21,8 +21,14 @@ public class Sql {
 	public static final String SELECT_TERMS      = "select * from `board_terms`";
 	public static final String SELECT_USER_FOR_FIND_ID = "SELECT `name`, `uid`,`email`, `rdate` FROM `board_user` WHERE `name` = ? AND `email` = ?";	
 	public static final String SELECT_USER_FOR_FIND_PW = "SELECT COUNT(`uid`) FROM `board_user` WHERE `uid` = ? AND `email` = ?";	
-	public static final String UPDATE_USER_PASSWORD = "UPDATE `board_user` SET `pass` = SHA2(?,256) WHERE `uid` = ?";
+	public static final String SELECT_USER_BY_SESSID = "SELECT * FROM `board_user` WHERE `sessId`= ? AND `sessLimitDate` > NOW()";
 	
+	public static final String UPDATE_USER_PASSWORD = "UPDATE `board_user` SET `pass` = SHA2(?,256) WHERE `uid` = ?";
+	public static final String UPDATE_USER_FOR_SESSION = "UPDATE `board_user` SET "
+														+ "`sessId` = ?, "
+														+ "`sessLimitDate` = DATE_ADD(NOW(), INTERVAL 3 DAY) "
+														+ "WHERE `uid` = ?";
+	public static final String UPDATE_USER_FOR_SESSION_OUT = "UPDATE `board_user` SET `sessId` = NULL, `sessLimitDate` = NULL WHERE `uid` = ?";
 	// board
 	public static final String INSERT_ARTICLE = "insert into `board_article` set "
 												+ "`title`=?,"

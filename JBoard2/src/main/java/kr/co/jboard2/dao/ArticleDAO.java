@@ -83,8 +83,117 @@ public class ArticleDAO extends DBHelper{
 		return vo;
 	}
 	
-	public void insertArticle() {}
+	public void updateArticleHit(String no) {
+		int result = 0;
+		try {
+			logger.info("updateArticleHit...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.UPDATE_ARTICLE_HIT);
+			psmt.setString(1, no);
+			result = psmt.executeUpdate();
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("result : " + result);
+	}
+	
+	public void selectComments(String no) {
+		
+	}
+	
+	public int insertArticle(ArticleVO vo) {
+		int parent = 0;
+		int result = 0;
+		try {
+			logger.info("insertArticle...");
+			conn = getConnection();
+			conn.setAutoCommit(false);
+			psmt = conn.prepareStatement(Sql.INSERT_ARTICLE);
+			psmt.setString(1, vo.getTitle());
+			psmt.setString(2, vo.getContent());
+			psmt.setInt(3, vo.getFile());
+			psmt.setString(4, vo.getUid());
+			psmt.setString(5, vo.getRegip());
+			
+			result = psmt.executeUpdate();
+			
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(Sql.SELECT_MAX_NO);
+			
+			conn.commit();
+			
+			if(rs.next()) {
+				parent = rs.getInt(1);
+			}
+
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		logger.debug("result : " + result);
+		logger.debug("parent : " + parent);
+		return parent;
+	}
+	
+	public void insertFile(int parent, String newName, String oriName) {
+		int result = 0;
+		try {
+			logger.info("insertFile...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.INSERT_FILE);
+			psmt.setInt(1, parent);
+			psmt.setString(2, newName);
+			psmt.setString(3, oriName);
+			result = psmt.executeUpdate();
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("result : " + result);
+	}
+	
+	
+	
 	public void updateArticle() {}
 	public void deleteArticle() {}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

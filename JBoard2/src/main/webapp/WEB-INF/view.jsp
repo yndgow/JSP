@@ -13,7 +13,7 @@
                     <c:if test="${vo.file ne 0}">
                     <tr>
                         <th>파일</th>
-                        <td><a href="#">2020년 상반기 매출자료.xls</a>&nbsp;<span>${vo.download}</span>회 다운로드</td>
+                        <td><a href="/JBoard2/download.do?fno=${vo.fno}">${vo.oriName}</a>&nbsp;<span>${vo.download}</span>회 다운로드</td>
                     </tr>
                     </c:if>
                     <tr>

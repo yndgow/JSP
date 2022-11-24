@@ -22,8 +22,20 @@ public class ViewController extends HttpServlet  {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		ArticleVO vo = ArticleDAO.getInstance().selelctArticle(req.getParameter("no"));
+		ArticleDAO dao = ArticleDAO.getInstance();
+		String no = req.getParameter("no");
+		// 글 select
+		ArticleVO vo = dao.selelctArticle(no);
 		req.setAttribute("vo", vo);
+		// 글 조회수 update
+		dao.updateArticleHit(no);
+
+		// 댓글 select
+		dao.selectComments(no);
+		
+		
+		
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/view.jsp");
 		dispatcher.forward(req, resp);
 	}

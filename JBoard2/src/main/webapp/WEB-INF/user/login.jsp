@@ -23,9 +23,9 @@
             </table>
             <input type="submit" value="로그인" class="btnLogin"/>
             <label>
-            	<input type="checkbox" name="saveUid"
+            	<input type="checkbox" name="auto"
             		<c:if test="${not empty cookie.cookieUser.value}">checked</c:if>
-            	>아이디 기억하기</label>
+            	>자동 로그인</label>
             
         </form>
         <div>

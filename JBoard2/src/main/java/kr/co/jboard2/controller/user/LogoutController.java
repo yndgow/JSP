@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import kr.co.jboard2.dao.UserDAO;
+
 @WebServlet("/user/logout.do")
 public class LogoutController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
@@ -22,16 +24,16 @@ public class LogoutController extends HttpServlet{
 		HttpSession session= req.getSession();
 		session.removeAttribute("sessUser");
 		session.invalidate();
+
 		// 쿠키 초기화
-		Cookie[] cookies = req.getCookies();
-		for(Cookie cookie : cookies) {
-			if(cookie.getName().equals("cookieUser")) {
-				cookie.setMaxAge(0);
-				cookie.setPath("/");
-				resp.addCookie(cookie);
-				break;
-			}
-		}
+		Cookie cookie = new Cookie("SESSID", null);
+		cookie.setMaxAge(0);
+		cookie.setPath("/");
+		resp.addCookie(cookie);
+		
+		String uid = req.getParameter("uid");
+		UserDAO.getInstance().updateUserSessionOut(uid);
+		
 		resp.sendRedirect("/JBoard2/user/login.do?success=201");
 	}
 }
