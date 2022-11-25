@@ -1,6 +1,7 @@
 package kr.co.jboard2.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -31,10 +32,8 @@ public class ViewController extends HttpServlet  {
 		dao.updateArticleHit(no);
 
 		// 댓글 select
-		dao.selectComments(no);
-		
-		
-		
+		List<ArticleVO> comments = dao.selectComments(no);
+		req.setAttribute("comments", comments);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/view.jsp");
 		dispatcher.forward(req, resp);

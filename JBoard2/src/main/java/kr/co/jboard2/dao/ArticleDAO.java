@@ -51,8 +51,25 @@ public class ArticleDAO extends DBHelper{
 		return articles;
 	}
 	
+	public int selectCountTotal() {
+		int result = 0;
+		try {
+			logger.info("selectCountTotal...");
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(Sql.SELECT_COUNT_TOTAL);
+			if(rs.next()) result = rs.getInt(1);
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("result : " + result);
+		return result;
+	}
+	
 	public ArticleVO selelctArticle(String no) {
 		ArticleVO vo = null;
+		int result = 0;
 		try {
 			logger.info("selelctArticle...");
 			conn = getConnection();
@@ -81,6 +98,7 @@ public class ArticleDAO extends DBHelper{
 			logger.error(e.getMessage());
 		}
 		logger.debug("vo : " + vo);
+		logger.debug("result : " + result);
 		return vo;
 	}
 	
@@ -123,8 +141,36 @@ public class ArticleDAO extends DBHelper{
 		logger.debug("result : " + result);
 	}
 	
-	public void selectComments(String no) {
-		
+	public List<ArticleVO> selectComments(String no) {
+		List<ArticleVO> comments = new ArrayList<>();
+		try {
+			logger.info("selectComments...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.SELECT_COMMENTS);
+			psmt.setString(1, no);
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				ArticleVO vo = new ArticleVO();
+				vo.setNo(rs.getInt(1));
+				vo.setParent(rs.getInt(2));
+				vo.setComment(rs.getInt(3));
+				vo.setCate(rs.getString(4));
+				vo.setTitle(rs.getString(5));
+				vo.setContent(rs.getString(6));
+				vo.setFile(rs.getInt(7));
+				vo.setHit(rs.getInt(8));
+				vo.setUid(rs.getString(9));
+				vo.setRegip(rs.getString(10));
+				vo.setRdate(rs.getString(11));
+				vo.setNick(rs.getString(12));
+				comments.add(vo);
+			}
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("comments : " + comments);
+		return comments;
 	}
 	
 	public int insertArticle(ArticleVO vo) {
@@ -179,9 +225,68 @@ public class ArticleDAO extends DBHelper{
 		logger.debug("result : " + result);
 	}
 	
+	// 댓글 쓰기
+	public ArticleVO insertComment(ArticleVO comment) {
+		
+		ArticleVO article = null;
+		int result = 0;
+		try{
+			logger.info("insertComment...");
+			conn = getConnection();
+			conn.setAutoCommit(false); // 트랜잭션 시작
+			
+			psmt = conn.prepareStatement(Sql.INSERT_COMMENT);
+			psmt.setInt(1, comment.getParent());
+			psmt.setString(2, comment.getContent());
+			psmt.setString(3, comment.getUid());
+			psmt.setString(4, comment.getRegip());
+			psmt.executeUpdate();
+			
+			psmt = conn.prepareStatement(Sql.UPDATE_ARTICLE_COMMENT);
+			psmt.setInt(1, comment.getParent());
+			result = psmt.executeUpdate();
+
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(Sql.SELECT_COMMENT_LATEST);
+			
+			conn.commit(); // 작업확정
+			
+			if(rs.next()) {
+				article = new ArticleVO();
+				article.setNo(rs.getInt(1));
+				article.setParent(rs.getInt(2));
+				article.setContent(rs.getString(6));
+				article.setRdate(rs.getString(11).substring(2, 10));
+				article.setNick(rs.getString(12));
+			}
+			close();
+			conn.close();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		logger.debug("result : " + result);
+		logger.debug("article : " + article);
+		return article;
+	}
 	
 	
-	public void updateArticle() {}
+	public void updateArticle(ArticleVO vo, String no) {
+		int result = 0;
+		try {
+			logger.info("updateArticle...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.UPDATE_ARTICLE);
+			psmt.setString(1, vo.getTitle());
+			psmt.setString(2, vo.getContent());
+			psmt.setString(3, no);
+			result = psmt.executeUpdate();
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("result : " + result);
+	}
 	
 	public void updateFileDownload(String fno) {
 		int result = 0;
@@ -198,7 +303,41 @@ public class ArticleDAO extends DBHelper{
 		logger.debug("result : " + result);
 	}
 	
-	public void deleteArticle() {}
+	public String deleteArticle(String no) {
+		int result1 = 0;
+		int result2 = 0;
+		String newName = null;
+		
+		try {
+			logger.info("deleteArticle...");
+			conn = getConnection();
+			conn.setAutoCommit(false);
+			
+			psmt = conn.prepareStatement(Sql.DELETE_ARTICLE);
+			psmt.setString(1, no);
+			psmt.setString(2, no);
+			result1 = psmt.executeUpdate();
+			
+			psmt = conn.prepareStatement(Sql.SELECT_FILE_WITH_PARENT);
+			psmt.setString(1, no);
+			rs = psmt.executeQuery();
+			if(rs.next()) newName = rs.getString(3);
+			
+			psmt = conn.prepareCall(Sql.DELETE_FILE);
+			psmt.setString(1, no);
+			result2 = psmt.executeUpdate();
+			
+			conn.commit();
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("result1 : " + result1);
+		logger.debug("result2 : " + result2);
+		logger.debug("newName : " + newName);
+		return newName;
+	}
+	
 	
 	
 	

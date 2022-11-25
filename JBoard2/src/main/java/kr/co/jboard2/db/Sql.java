@@ -82,7 +82,9 @@ public class Sql {
 	public static final String UPDATE_ARTICLE_HIT = "UPDATE `board_article` SET `hit` = `hit` + 1 WHERE `no`=?";
 	public static final String UPDATE_FILE_DOWNLOAD = "UPDATE `board_file` SET `download` = `download` + 1 WHERE `fno`=?";  
 	
+	public static final String UPDATE_ARTICLE_COMMENT = "UPDATE `board_article` SET `comment` = `comment` + 1 WHERE `no` = ?";
 	public static final String UPDATE_COMMENT = "UPDATE `board_article` SET `content`=?, `rdate`=NOW() WHERE `no`=?";
+	
 	
 	public static final String DELETE_ARTICLE = "delete from `board_article` where `no`=? or `parent`=?";
 	public static final String DELETE_COMMENT = "delete from `board_article` where `no`=?";
