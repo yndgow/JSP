@@ -23,6 +23,7 @@ public class CommentWriteController extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.setContentType("application/x-json; charset=UTF-8");
 		ArticleVO comment = new ArticleVO();
 		comment.setParent(req.getParameter("parent"));
 		comment.setUid(req.getParameter("uid"));

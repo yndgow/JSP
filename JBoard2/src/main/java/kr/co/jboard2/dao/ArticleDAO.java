@@ -161,7 +161,7 @@ public class ArticleDAO extends DBHelper{
 				vo.setHit(rs.getInt(8));
 				vo.setUid(rs.getString(9));
 				vo.setRegip(rs.getString(10));
-				vo.setRdate(rs.getString(11));
+				vo.setRdate(rs.getString(11).substring(2,10));
 				vo.setNick(rs.getString(12));
 				comments.add(vo);
 			}
@@ -242,7 +242,7 @@ public class ArticleDAO extends DBHelper{
 			psmt.setString(4, comment.getRegip());
 			psmt.executeUpdate();
 			
-			psmt = conn.prepareStatement(Sql.UPDATE_ARTICLE_COMMENT);
+			psmt = conn.prepareStatement(Sql.UPDATE_ARTICLE_COMMENT_UP);
 			psmt.setInt(1, comment.getParent());
 			result = psmt.executeUpdate();
 
@@ -303,6 +303,23 @@ public class ArticleDAO extends DBHelper{
 		logger.debug("result : " + result);
 	}
 	
+	public int updateArticleComment(String no, String content) {
+		int result = 0;
+		try {
+			logger.info("updateArticleComment");
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.UPDATE_COMMENT);
+			psmt.setString(1, content);
+			psmt.setString(2, no);
+			result = psmt.executeUpdate();
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("result : " + result);
+		return result;
+	}
+	
 	public String deleteArticle(String no) {
 		int result1 = 0;
 		int result2 = 0;
@@ -338,7 +355,31 @@ public class ArticleDAO extends DBHelper{
 		return newName;
 	}
 	
-	
+	public int deleteComment(String no) {
+		int result1 = 0;
+		int result2 = 0;
+		try {
+			logger.info("deleteComment...");
+			conn = getConnection();
+			conn.setAutoCommit(false);
+			
+			psmt = conn.prepareStatement(Sql.DELETE_COMMENT);
+			psmt.setString(1, no);
+			result1 = psmt.executeUpdate();
+			
+			psmt = conn.prepareStatement(Sql.UPDATE_ARTICLE_COMMENT_DOWM);
+			psmt.setString(1, no);
+			result2 = psmt.executeUpdate();
+			
+			conn.commit();
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("result1 : " + result1);
+		logger.debug("result2 : " + result2);
+		return result1;
+	}
 	
 	
 	
