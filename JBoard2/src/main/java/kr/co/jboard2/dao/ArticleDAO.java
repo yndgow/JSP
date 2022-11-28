@@ -75,9 +75,9 @@ public class ArticleDAO extends DBHelper{
 			logger.info("selectCountTotal...");
 			conn = getConnection();
 			psmt = conn.prepareStatement(Sql.SELECT_COUNT_TOTAL_FOR_SEARCH);
-			psmt.setString(1, "%"+keyword+"%");
-			psmt.setString(2,  "%"+keyword+"%");
-			psmt.executeQuery();
+			psmt.setString(1, '%'+keyword+'%');
+			psmt.setString(2, '%'+keyword+'%');
+			rs = psmt.executeQuery();
 			if(rs.next()) result = rs.getInt(1);
 			close();
 		} catch (Exception e) {
@@ -435,41 +435,4 @@ public class ArticleDAO extends DBHelper{
 		logger.debug("result2 : " + result2);
 		return result1;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
