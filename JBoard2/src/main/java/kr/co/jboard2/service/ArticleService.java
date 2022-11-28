@@ -36,8 +36,15 @@ public enum ArticleService {
 		return dao.selelctArticles(start);
 	}
 	
+	public List<ArticleVO> selectArticleByKeyword(String keyword, int start) {
+		return dao.selectArticleByKeyword(keyword, start);
+	}
+	
 	public int selectCountTotal() {
 		return dao.selectCountTotal();
+	}
+	public int selectCountTotal(String keyword) {
+		return dao.selectCountTotal(keyword);
 	}
 	
 	
