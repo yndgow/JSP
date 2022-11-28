@@ -15,8 +15,6 @@ public class HelloController extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setAttribute("group", req.getParameter("group"));
-		req.setAttribute("cate", req.getParameter("cate"));
 		req.setAttribute("cateResult", 1);
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/introduction/hello.jsp");
 		dispatcher.forward(req, resp);
