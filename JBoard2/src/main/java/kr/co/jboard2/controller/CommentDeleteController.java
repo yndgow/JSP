@@ -23,7 +23,8 @@ public class CommentDeleteController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String no = req.getParameter("no");
-		int result = ArticleDAO.getInstance().deleteComment(no);
+		String parent = req.getParameter("parent");
+		int result = ArticleDAO.getInstance().deleteComment(no, parent);
 		JsonObject json = new JsonObject();
 		json.addProperty("result", result);
 		PrintWriter writer = resp.getWriter();

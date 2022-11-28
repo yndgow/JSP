@@ -83,7 +83,7 @@ public class Sql {
 	public static final String UPDATE_FILE_DOWNLOAD = "UPDATE `board_file` SET `download` = `download` + 1 WHERE `fno`=?";  
 	
 	public static final String UPDATE_ARTICLE_COMMENT_UP = "UPDATE `board_article` SET `comment` = `comment` + 1 WHERE `no` = ?";
-	public static final String UPDATE_ARTICLE_COMMENT_DOWM = "UPDATE `board_article` SET `comment` = `comment` + 1 WHERE `no` = ?";
+	public static final String UPDATE_ARTICLE_COMMENT_DOWM = "UPDATE `board_article` SET `comment` = `comment` - 1 WHERE `no` = ?";
 	
 	public static final String UPDATE_COMMENT = "UPDATE `board_article` SET `content`=?, `rdate`=NOW() WHERE `no`=?";
 	

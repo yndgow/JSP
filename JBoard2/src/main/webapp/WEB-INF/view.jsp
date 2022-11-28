@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="./_header.jsp"/>
+<script src="/JBoard2/js/comment.js"></script>
 <main id="board">
     <section class="view">
         
@@ -42,7 +43,7 @@
                 <p class="content">${comment.content}</p>
                 <c:if test="${sessUser.uid eq comment.uid}">                        
                 <div>
-                    <a href="#" data-no="${comment.no}" class="remove">삭제</a>
+                    <a href="#" data-no="${comment.no}" data-par="${comment.parent}" class="remove">삭제</a>
                     <a href="#" data-no="${comment.no}" class="modify">수정</a>
                 </div>
                 </c:if>

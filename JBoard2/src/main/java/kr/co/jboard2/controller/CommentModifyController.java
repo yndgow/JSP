@@ -1,8 +1,6 @@
 package kr.co.jboard2.controller;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
@@ -15,10 +13,14 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import kr.co.jboard2.dao.ArticleDAO;
+import kr.co.jboard2.service.ArticleService;
 import kr.co.jboard2.vo.ArticleVO;
 
 @WebServlet("/commentModify.do")
 public class CommentModifyController extends HttpServlet{
+	
+	private ArticleService service = ArticleService.INSTANCE;
+	
 	private static final long serialVersionUID = 1L;
 	
 	@Override
@@ -26,10 +28,9 @@ public class CommentModifyController extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println(req.getInputStream());
 		
 		Gson gson = new Gson();
-		ArticleVO vo = gson.fromJson(getBody(req), ArticleVO.class);
+		ArticleVO vo = gson.fromJson(service.getBody(req), ArticleVO.class);
 		String no = String.valueOf(vo.getNo());
 		String content = vo.getContent();
 		
@@ -40,21 +41,4 @@ public class CommentModifyController extends HttpServlet{
 		PrintWriter writer = resp.getWriter();
 		writer.print(json.toString());
 	}
-	
-
-	
-	public static String getBody(HttpServletRequest request) throws IOException {
-		 
-		BufferedReader input = new BufferedReader(new InputStreamReader(request.getInputStream()));
-        StringBuilder builder = new StringBuilder();
-        String buffer;
-        while ((buffer = input.readLine()) != null) {
-            if (builder.length() > 0) {
-                builder.append("\n");
-            }
-            builder.append(buffer);
-        }
-        return builder.toString();
-    }
-
 }

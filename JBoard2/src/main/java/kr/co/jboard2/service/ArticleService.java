@@ -1,7 +1,9 @@
 package kr.co.jboard2.service;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -108,4 +110,18 @@ public enum ArticleService {
 	public int getStartNum(int currentPage) {
 		return (currentPage - 1) * 10;
 	}
+	
+	public String getBody(HttpServletRequest request) throws IOException {
+		 
+		BufferedReader input = new BufferedReader(new InputStreamReader(request.getInputStream()));
+        StringBuilder builder = new StringBuilder();
+        String buffer;
+        while ((buffer = input.readLine()) != null) {
+            if (builder.length() > 0) {
+                builder.append("\n");
+            }
+            builder.append(buffer);
+        }
+        return builder.toString();
+    }
 }

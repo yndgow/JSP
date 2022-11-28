@@ -1,5 +1,6 @@
 package kr.co.jboard2.dao;
 
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -340,7 +341,7 @@ public class ArticleDAO extends DBHelper{
 			rs = psmt.executeQuery();
 			if(rs.next()) newName = rs.getString(3);
 			
-			psmt = conn.prepareCall(Sql.DELETE_FILE);
+			psmt = conn.prepareStatement(Sql.DELETE_FILE);
 			psmt.setString(1, no);
 			result2 = psmt.executeUpdate();
 			
@@ -355,7 +356,7 @@ public class ArticleDAO extends DBHelper{
 		return newName;
 	}
 	
-	public int deleteComment(String no) {
+	public int deleteComment(String no, String parent) {
 		int result1 = 0;
 		int result2 = 0;
 		try {
@@ -367,9 +368,10 @@ public class ArticleDAO extends DBHelper{
 			psmt.setString(1, no);
 			result1 = psmt.executeUpdate();
 			
-			psmt = conn.prepareStatement(Sql.UPDATE_ARTICLE_COMMENT_DOWM);
-			psmt.setString(1, no);
-			result2 = psmt.executeUpdate();
+			PreparedStatement psmt1;
+			psmt1 = conn.prepareStatement(Sql.UPDATE_ARTICLE_COMMENT_DOWM);
+			psmt1.setString(1, parent);
+			result2 = psmt1.executeUpdate();
 			
 			conn.commit();
 			close();

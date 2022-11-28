@@ -6,7 +6,7 @@
     <title>게시판</title>
     <link rel="stylesheet" href="/JBoard2/css/style.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script src="/JBoard2/js/comment.js"></script>
+    
 </head>
 <body>
     <div id="wrapper">

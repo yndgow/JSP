@@ -1,4 +1,10 @@
 $(()=>{
+	let btnRemove = document.getElementsByClassName("btnRemove")[0]; 
+	btnRemove.addEventListener("click", e=>{
+		let result = confirm('삭제하시겠습니까?');
+		if(result) e.defaultPrevented();
+		else e.preventDefault();
+	});
 	
 	let cmtContent = document.querySelectorAll("textarea")[1];
 	cmtContent.addEventListener("focus", (e)=>{
@@ -30,14 +36,13 @@ $(()=>{
                 	<span class="date">${data.rdate}</span>
                 	<p class="content">${data.content}</p>                        
                 	<div>
-                    	<a href="#" data-no="${data.no}" class="remove">삭제</a>
+                    	<a href="#" data-no="${data.no}" data-par="${data.parent}" class="remove">삭제</a>
                     	<a href="#" data-no="${data.no}" class="modify">수정</a>
                 	</div>
             	</article>`;
             	
             	$('.commentList').append(tag);
             	$('.commentForm textarea[name=content]').val('댓글내용 입력');
-            	
 			}
 		});	
 	});
@@ -49,8 +54,9 @@ $(()=>{
 		let tar = e.target;
 		let varClass = tar.getAttribute("class");
 		let no = tar.dataset.no;
+		let parent = tar.dataset.par;
 		if(varClass == "remove"){
-			let url = '/JBoard2/commentDelete.do?no='+no;
+			let url = `/JBoard2/commentDelete.do?no=${no}&parent=${parent}`;
 			let result = confirm('삭제하시겠습니까?');
 			if(result){
 				fetch(url)
@@ -85,7 +91,6 @@ $(()=>{
 						
 			tar.addEventListener("click", ()=>{
 				if(tar.textContent == "수정완료"){
-					console.log('수정완료1');
 					let url = '/JBoard2/commentModify.do';
 					fetch(url, {
 							    method: 'POST', // *GET, POST, PUT, DELETE 등
@@ -109,10 +114,7 @@ $(()=>{
 						}
 					})
 				}
-				
-				console.log('수정완료2');
 			});
-				
 		}
 	});
 });

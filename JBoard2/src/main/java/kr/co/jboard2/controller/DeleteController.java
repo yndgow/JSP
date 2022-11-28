@@ -24,9 +24,10 @@ public class DeleteController extends HttpServlet{
 		ArticleDAO dao = ArticleDAO.getInstance();
 		String newName = dao.deleteArticle(no);
 		String path = req.getServletContext().getRealPath("/file");
-		File file = new File(path, newName);
-		if(file.exists()) file.delete();
-		
+		if(newName != null) {
+			File file = new File(path, newName);
+			if(file.exists()) file.delete();
+		}
 		resp.sendRedirect("/JBoard2/list.do");
 	}
 
