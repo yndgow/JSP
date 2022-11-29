@@ -14,6 +14,9 @@
   	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
   	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   	<script src="/FarmStory2/js/user/postcode.js"></script>
+  	<script src="/FarmStory2/js/user/terms.js"></script>
+  	<script src="/FarmStory2/js/user/validation.js"></script>
+  	<script src="/FarmStory2/js/user/emailAuth.js"></script>
 	
   </head>
   <body>

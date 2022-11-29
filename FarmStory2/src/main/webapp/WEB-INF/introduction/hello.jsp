@@ -3,7 +3,7 @@
 <jsp:include page="../_header.jsp"/>
 <jsp:include page="./_asideHello.jsp"/>
 
-            <span>내용</span>
+            <span></span>
             <img src="/FarmStory2/img/sub_page1_article_txt.png"/>
             <p>
                 항상 저희 팜스토리를 성원해 주시고 관심을 가져주시는 모든 분들께 감사의 인사를 드리며<br>

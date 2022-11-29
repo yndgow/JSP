@@ -8,21 +8,21 @@
                 <th>아이디</th>
                 <td>
                     <input type="text" id="uid" name="uid" placeholder="아이디 입력">
-                    <button type="button" id="checkUid"><img src="/FarmStory2/img/user/chk_id.gif" alt="중복확인"></button>
+                    <button type="button" id="btnUidCheck"><img src="/FarmStory2/img/user/chk_id.gif" alt="중복확인"></button>
                     <span class="uidResult"></span>
                 </td>
             </tr>
             <tr>
                 <th>비밀번호</th>
                 <td>
-                    <input type="password" id="pass1" name="pass" placeholder="비밀번호 입력">
-                    <span class="resultPass"></span>
+                    <input type="password" id="pass1" name="pass1" placeholder="비밀번호 입력">
+                    <span class="passResult"></span>
                 </td>
             </tr>
             <tr>
                 <th>비밀번호 확인</th>
                 <td>
-                    <input type="password" id="pass2" placeholder="비밀번호 확인 입력">
+                    <input type="password" id="pass2" name="pass2" placeholder="비밀번호 확인 입력">
                 </td>
             </tr>
         </table>
@@ -33,6 +33,7 @@
                 <th>이름</th>
                 <td>
                     <input type="text" id="name" name="name" placeholder="이름 입력">
+                    <span class="nameResult"></span>
                 </td>
             </tr>
             <tr>
@@ -45,15 +46,26 @@
                 </td>
             </tr>
             <tr>
-                <th>이메일</th>
+                <th rowspan="2" id="_rowspan">이메일</th>
                 <td>
                     <input type="email" id="email" name="email" placeholder="이메일 입력">
+                    <button type="button" id="btnEmail"><img src="/FarmStory2/img/user/chk_auth.gif" alt="인증번호 받기"/></button>
+                    <span class="emailResult"></span>
+                </td>
+            
+            </tr>
+            <tr class="auth">
+                <td>
+                	<input name="auth"/>
+                	<button type="button" id="btnAuth"><img src="/FarmStory2/img/user/chk_confirm.gif" alt="확인"/></button>
                 </td>
             </tr>
+            
             <tr>
                 <th>휴대폰</th>
                 <td>
                     <input type="text" id="hp" name="hp" placeholder="- 포함 13자리 입력">
+                    <span class="hpResult"></span>
                 </td>
             </tr>
             <tr>
