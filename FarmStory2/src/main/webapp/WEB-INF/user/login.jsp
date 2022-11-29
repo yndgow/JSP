@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="../_header.jsp"/>
 <main id="user" class="login">
-    <form action="/FarmStory2/login.do" method="post">
+    <form action="/FarmStory2/user/login.do" method="post">
         <table>
             <tr>
                 <td><img src="/FarmStory2/img/login_ico_id.png" alt="로그인"></td>

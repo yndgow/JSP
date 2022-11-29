@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.JsonObject;
 
 import kr.co.FarmStory2.dao.UserDAO;
+import kr.co.FarmStory2.vo.UserVO;
 
 public enum UserService {
 	
@@ -30,4 +31,11 @@ public enum UserService {
 		return dao.selectCountNick(nick);
 	}
 	
+	public void insertUser(UserVO vo) {
+		dao.insertUser(vo); 
+	}
+	
+	public UserVO selectUser(String uid, String pass) {
+		return dao.selectUser(uid, pass);
+	}
 }
