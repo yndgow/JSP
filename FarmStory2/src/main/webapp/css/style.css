@@ -516,4 +516,7 @@ footer > p > em {
 #tabs .txt > li > a {
     color: #666;
 }
-
+.directionSp{
+	font-weight: bold;
+    color: #91BA15;	
+}

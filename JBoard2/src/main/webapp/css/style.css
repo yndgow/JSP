@@ -578,3 +578,17 @@ footer > p {
     float: right;
     margin-top: 10px;
 }
+
+#btnPwModify{
+    background-color: #2e658a;
+    color: white;
+    border-radius: 3px;
+    width: 78px;
+    height: 22px;
+    font-size: 11px;
+}
+#btnUserDelete{
+	padding:6px;
+	background: #ed2f2f;
+	color: #fff;
+}

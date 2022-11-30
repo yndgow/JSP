@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="sub">
   <div>
-    <img src="../img/sub_top_tit.png" alt="" />
+    <img src="../img/sub_top_tit${cateResult}.png" alt="" />
   </div>
   <section class="cate${cateResult}">
     <aside>
@@ -27,7 +27,7 @@
     </aside>
     <article>
       <nav class="subNav">
-      	<img src="../img/sub_nav_tit_cate_tit.png" alt="">
+      	      	<img src="../img/sub_nav_tit_cate${cateResult}_tit${cate}.png" alt="">
       	<p>HOME > 커뮤니티 > <em>장보기</em> </p>
       </nav>
       

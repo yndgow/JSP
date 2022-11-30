@@ -16,6 +16,7 @@ public class Sql {
 												+ "`rdate`=NOW()";
 	
 	public static final String SELECT_USER       = "select * from `board_user` where `uid`=? and `pass`=SHA2(?, 256)";
+	public static final String SELECT_USER_FOR_CONFIRM = "SELECT COUNT(`uid`) from `board_user` where `uid`=? and `pass`=SHA2(?, 256)";
 	public static final String SELECT_COUNT_UID  = "select count(`uid`) from `board_user` where `uid`=?";
 	public static final String SELECT_COUNT_NICK = "select count(`nick`) from `board_user` where `nick`=?";
 	public static final String SELECT_TERMS      = "select * from `board_terms`";
@@ -24,6 +25,7 @@ public class Sql {
 	public static final String SELECT_USER_BY_SESSID = "SELECT * FROM `board_user` WHERE `sessId`= ? AND `sessLimitDate` > NOW()";
 	
 	
+	public static final String UPDATE_USER = "UPDATE `board_user` SET `name`=?, `nick`=?, `email`=?, `hp`=?, `zip`=?, `addr1`=?, `addr2`=? WHERE `uid`=?";
 	
 	public static final String UPDATE_USER_PASSWORD = "UPDATE `board_user` SET `pass` = SHA2(?,256) WHERE `uid` = ?";
 	public static final String UPDATE_USER_FOR_SESSION = "UPDATE `board_user` SET "
@@ -100,7 +102,7 @@ public class Sql {
 	public static final String UPDATE_ARTICLE_COMMENT_DOWM = "UPDATE `board_article` SET `comment` = `comment` - 1 WHERE `no` = ?";
 	
 	public static final String UPDATE_COMMENT = "UPDATE `board_article` SET `content`=?, `rdate`=NOW() WHERE `no`=?";
-	
+	public static final String DELETE_USER = "UPDATE `board_user` SET `grade` = 0, `wdate` = NOW() WHERE `uid` =?";
 	
 	public static final String DELETE_ARTICLE = "delete from `board_article` where `no`=? or `parent`=?";
 	public static final String DELETE_COMMENT = "delete from `board_article` where `no`=?";

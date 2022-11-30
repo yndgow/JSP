@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="sub">
   <div>
-    <img src="../img/sub_top_tit.png" alt="" />
+    <img src="../img/sub_top_tit1.png" alt="" />
   </div>
   <section class="cate1">
     <aside>
@@ -25,7 +25,7 @@
     </aside>
     <article>
       <nav class="subNav">
-      	<img src="/FarmStory2/img/sub_nav_tit_cate_tit.png" alt="">
+      	<img src="/FarmStory2/img/sub_nav_tit_cate1_tit${cateResult}.png" alt="">
       	<p>HOME > 팜스토리소개 >
       		<c:choose>
       			<c:when test="${cateResult eq 1}">

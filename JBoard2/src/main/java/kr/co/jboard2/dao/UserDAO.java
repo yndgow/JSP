@@ -128,6 +128,27 @@ public class UserDAO extends DBHelper {
 		}
 		logger.debug("result : " + vo);
 		return vo;
+		
+	}
+	
+	public int selectUserConfirm(String uid, String pass) {
+		int result = 0;
+		try {
+			logger.info("selectUserConfirm...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.SELECT_USER_FOR_CONFIRM);
+			psmt.setString(1, uid);
+			psmt.setString(2, pass);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("result : " + result);
+		return result;
 	}
 	
 	public void selectUsers() {}
@@ -208,8 +229,6 @@ public class UserDAO extends DBHelper {
 		return vo;
 	}
 	
-	public void updateUser() {}
-	
 	public int updateUserPassword(String pass, String uid) {
 		int result = 0;
 		try {
@@ -259,7 +278,45 @@ public class UserDAO extends DBHelper {
 		return result;
 	}
 	
-	public void deleteUser() {}
+	public int updateUser(UserVO vo) {
+		int result = 0;
+		try {
+			logger.info("updateUser...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.UPDATE_USER);
+			psmt.setString(1, vo.getName());
+			psmt.setString(2, vo.getNick());
+			psmt.setString(3, vo.getEmail());
+			psmt.setString(4, vo.getHp());
+			psmt.setString(5, vo.getZip());
+			psmt.setString(6, vo.getAddr1());
+			psmt.setString(7, vo.getAddr2());
+			psmt.setString(8, vo.getUid());
+			result = psmt.executeUpdate();
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("result : " + result);
+		return result;
+	}
+	
+	
+	public int deleteUser(String uid) {
+		int result = 0;
+		try {
+			logger.info("deleteUser...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.DELETE_USER);
+			psmt.setString(1, uid);
+			result = psmt.executeUpdate();
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("result : " + result);
+		return result;
+	}
 	
 	
 	

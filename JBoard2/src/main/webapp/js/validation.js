@@ -57,6 +57,7 @@ $(function(){
 	$('input[name=pass1], input[name=pass2]').focusout(function(){
 		const pass1 = $('input[name=pass1]').val();
 		const pass2 = $('input[name=pass2]').val();
+		
 		if(pass1!==pass2) {
 			isPassMatch = false;
 			$('.passResult').css('color','red').text('비밀번호가 일치하지 않습니다.');
@@ -70,6 +71,12 @@ $(function(){
 		}else{
 			isPassOK = false;
 			$('.passResult').css('color','red').text('영문, 숫자, 특수문자 조합 최소5자 이상이여야 합니다.');
+		}
+		
+		if(location.pathname=='/JBoard2/user/myInfo.do'){
+			if(pass1 == '' && pass2 == ''){
+				$('.passResult').text('');
+			}
 		}
 	});
 	
@@ -153,7 +160,12 @@ $(function(){
 		}
 		
 		// 최종 통과
-		alert('회원가입해주셔서 감사합니다. 로그인해주시기바랍니다.');
+		if(location.pathname == '/JBoard2/user/myInfo.do'){
+			alert('회원정보가 수정되었습니다.');
+		}else{
+			alert('회원가입해주셔서 감사합니다. 로그인해주시기바랍니다.');	
+		}
+		
 		return true;
 	});
 });
