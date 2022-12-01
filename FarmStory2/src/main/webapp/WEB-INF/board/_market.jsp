@@ -2,11 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="sub">
   <div>
-    <img src="../img/sub_top_tit${cateResult}.png" alt="" />
+    <img src="../img/sub_top_tit${groupNum}.png" alt="" />
   </div>
-  <section class="cate${cateResult}">
+  <section class="cate${groupNum}">
     <aside>
-      <img src="/FarmStory2/img/sub_aside_cate${cateResult}_tit.png" alt="" />
+      <img src="/FarmStory2/img/sub_aside_cate${groupNum}_tit.png" alt="" />
       <ul>
       <c:forEach var="i" begin="1" end="1">
       	<c:choose>
@@ -19,7 +19,7 @@
       	</c:choose>
         <li class="${ind}">
           <a href="./list.do?group=${group}&cate=${i}">
-			<img src="/FarmStory2/img/sub_cate${cateResult}_lnb${i}.png" alt=""/> 
+			<img src="/FarmStory2/img/sub_cate${groupNum}_lnb${i}.png" alt=""/> 
           </a>
         </li>
         </c:forEach>
@@ -27,8 +27,8 @@
     </aside>
     <article>
       <nav class="subNav">
-      	      	<img src="../img/sub_nav_tit_cate${cateResult}_tit${cate}.png" alt="">
-      	<p>HOME > 커뮤니티 > <em>장보기</em> </p>
+      	      	<img src="../img/sub_nav_tit_cate${groupNum}_tit${cate}.png" alt="">
+      	<p>HOME > ${groupStr} > <em>장보기</em> </p>
       </nav>
       
       

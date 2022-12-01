@@ -278,6 +278,9 @@ main > .info .account {
     top: 40px;
     line-height: 18px;
 }
+main > .info > div > .info_img_community{
+	cursor : pointer;
+}
 
 /* 서브페이지 공통 */
 #sub {

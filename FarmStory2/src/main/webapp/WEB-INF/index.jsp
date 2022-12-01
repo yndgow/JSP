@@ -1,10 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="./_header.jsp"/>
- <script>
+<script src="/FarmStory2/js/recent.js"></script>
+<script>
   $( function() {
     $( "#tabs" ).tabs();
   } );
-  </script>
+</script>
 <main>
   <div class="slider">
     <img src="img/main_slide_img_tit.png" alt="팜스토리" />
@@ -37,9 +38,8 @@
         <tr>
           <td>></td>
           <td>
-            <a href="/FarmStory2/board/view.do?group=croptalk&cate=2&pg=1&no="></a>
+			<a href="/FarmStory2/board/view.do?group=croptalk&cate=2&pg=1&no=">마토마</a>
           </td>
-          <td></td>
         </tr>
       </table>
     </div>
@@ -50,9 +50,8 @@
         <tr>
           <td>></td>
           <td>
-            <a href="/FarmStory1/board/view.jsp?group=croptalk&cate=3&pg=1&no="></a>
+            <a href="/FarmStory1/board/view.jsp?group=croptalk&cate=3&pg=1&no=">토마토</a>
           </td>
-          <td></td>
         </tr>
       </table>
     </div>
@@ -63,9 +62,8 @@
         <tr>
           <td>></td>
           <td>
-            <a href="/FarmStory2/board/view.jsp?group=croptalk&cate=1&pg=1&no="></a>
+            <a href="/FarmStory2/board/view.jsp?group=croptalk&cate=1&pg=1&no=">토마토마토</a>
           </td>
-          <td></td>
         </tr>
       </table>
     </div>
@@ -76,9 +74,9 @@
       <img src="img/main_sub2_cs_tit.png" alt="" />
       <img src="img/main_sub2_cs_img.png" alt="" />
       <img src="img/main_sub2_cs_txt.png" alt="" />
-      <img src="img/main_sub2_cs_bt1.png" alt="" />
-      <img src="img/main_sub2_cs_bt2.png" alt="" />
-      <img src="img/main_sub2_cs_bt3.png" alt="" />
+	  <img src="img/main_sub2_cs_bt1.png" alt="" class="info_img_community"/>
+      <img src="img/main_sub2_cs_bt2.png" alt="" class="info_img_community"/>
+      <img src="img/main_sub2_cs_bt3.png" alt="" class="info_img_community"/>
       <p class="time">
         평일: AM 09:00 ~ PM 06:00<br />
         점심: PM 12:00 ~ PM 01:00<br />

@@ -1,13 +1,21 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="../_header.jsp"/>
+<script>
+$(()=>{
+	$('.btnCancel').click((e)=>{
+		e.preventDefault();
+		history.back();
+	});
+});
+</script>
 <main id="board" class="write">
-    <form action="/FarmStory1/board/proc/writeProc.jsp" method="post">
-    <input type="hidden" name="group" value="">
-    <input type="hidden" name="cate" value="">
-    <input type="hidden" name="uid" value="">
+    <form action="/FarmStory2/board/write.do" method="post">
+    <input type="hidden" name="group" value="${group}">
+    <input type="hidden" name="cate" value="${cate}">
+    <input type="hidden" name="uid" value="${sessUser.uid}">
     
-        <table border="0">      
-            <caption><img src="../img/sub_nav_tit_cate_tit.png" alt="글쓰기"></caption>
+        <table>      
+            <caption><img src="../img/sub_nav_tit_cate${groupNum}_tit${cate}.png" alt="글쓰기"></caption>
             <tbody>
                 <tr>
                     <th>제목</th>
@@ -19,13 +27,13 @@
                 </tr>
                 <tr>
                     <th>파일</th>
-                    <td><input type="file" name="file" id="fileUpload"></td>
+                    <td><input type="file" name="fname" id="fileUpload"></td>
                 </tr>
             </tbody>
         </table>
         
         <div>
-            <a href="./list.html" class="btn cancel">취소</a>
+            <a href="./list.html" class="btn btnCancel">취소</a>
             <input type="submit" value="작성완료" class="btn btnComplete">
         </div>
     </form>

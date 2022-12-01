@@ -28,9 +28,13 @@
         <img src="/FarmStory2/img/head_txt_img.png" alt="" />
         <p>
           <a href="/FarmStory2/index.do">HOME |</a>
+          <c:if test="${sessUser eq null }">
           <a href="/FarmStory2/user/login.do">로그인 |</a>
+          </c:if>
+          <c:if test="${sessUser ne null }">
           <a href="/FarmStory2/user/terms.do">회원가입 |</a>
           <a href="/FarmStory2/user/proc/logout.do">로그아웃 |</a>
+          </c:if>
           <a href="#">고객센터</a>
         </p>
         <ul class="gnb">
