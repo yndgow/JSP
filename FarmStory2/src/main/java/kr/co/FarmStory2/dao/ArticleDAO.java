@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import kr.co.FarmStory2.db.DBHelper;
 import kr.co.FarmStory2.db.Sql;
 import kr.co.FarmStory2.vo.ArticleVO;
+import kr.co.FarmStory2.vo.FileVO;
 import kr.co.FarmStory2.vo.TermsVO;
 
 public class ArticleDAO extends DBHelper{
@@ -95,6 +96,9 @@ public class ArticleDAO extends DBHelper{
 				vo.setUid(rs.getString(9));
 				vo.setRegip(rs.getString(10));
 				vo.setRdate(rs.getString(11).substring(2,10));
+				vo.setFno(rs.getInt(12));
+				vo.setOriName(rs.getString(13));
+				vo.setDownload(rs.getInt(14));
 			}
 			close();
 		} catch (Exception e) {
@@ -119,10 +123,99 @@ public class ArticleDAO extends DBHelper{
 		logger.debug("result : " + result);
 		return result;
 	}
+	
 	public int selectCountTotalKeyword(String keyword) {
 		int result = 0;
 		
 		return result;
+	}
+	
+	public FileVO selectFile(String fno) {
+		FileVO vo = null;
+		try {
+			logger.info("selectFile...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.SELECT_FILE);
+			psmt.setString(1, fno);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				vo = new FileVO();
+				vo.setParent(rs.getInt(2));
+				vo.setNewName(rs.getString(3));
+				vo.setOriName(rs.getString(4));
+			}
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("vo: " + vo);
+		return vo;
+	}
+	
+	
+	public int insertArticle(ArticleVO vo) {
+		int result = 0;
+		int parent = 0;
+		try {
+			logger.info("insertArticle...");
+			conn = getConnection();
+			conn.setAutoCommit(false);
+			psmt = conn.prepareStatement(Sql.INSERT_ARTICLE);
+			psmt.setString(1, vo.getCate());
+			psmt.setString(2, vo.getTitle());
+			psmt.setString(3, vo.getContent());
+			psmt.setInt(4, vo.getFile());
+			psmt.setString(5, vo.getUid());
+			psmt.setString(6, vo.getRegip());
+			result = psmt.executeUpdate();
+			
+			stmt = conn.createStatement();
+			rs =stmt.executeQuery(Sql.SELECT_MAX_NO);
+			conn.commit();
+			
+			if(rs.next()) parent = rs.getInt(1);
+			
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("result : " + result);
+		logger.debug("parent : " + parent);
+		return parent;
+	}
+	
+	public void insertFile(int parent, String newName, String oriName) {
+		int result = 0;
+		try {
+			logger.info("insertFile...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.INSERT_FILE);
+			psmt.setInt(1, parent);
+			psmt.setString(2, newName);
+			psmt.setString(3, oriName);
+			result = psmt.executeUpdate();
+			
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("result : " + result);
+	}
+	
+	public void updateFileDownload(String fno) {
+		int result = 0;
+		try {
+			logger.info("updateFileDownload...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.UPDATE_FILE_DOWNLOAD);
+			psmt.setString(1, fno);
+			result = psmt.executeUpdate();
+			
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("result : " + result);
 	}
 	
 	

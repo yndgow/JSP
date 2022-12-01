@@ -9,9 +9,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.oreilly.servlet.MultipartRequest;
+
+import kr.co.FarmStory2.service.ArticleService;
+import kr.co.FarmStory2.vo.ArticleVO;
+
 @WebServlet("/board/write.do")
 public class WriteController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
+	ArticleService service = ArticleService.INSTANCE;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -24,11 +30,28 @@ public class WriteController extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String uid = req.getParameter("uid");
-		String cate = req.getParameter("cate");
-		String title = req.getParameter("title");
-		String content = req.getParameter("content");
-		String regip = req.getRemoteAddr();
 		
+		String savePath = req.getServletContext().getRealPath("/file");
+		MultipartRequest mr = service.getMultiPartRequest(req, savePath);
+		
+		String group = mr.getParameter("group");
+		String cate = mr.getParameter("cate");
+		String fName = mr.getFilesystemName("fname");
+		String uid = mr.getParameter("uid");
+		String cateStr = service.getGroupInfo(group, cate).get("cateStr");
+		
+		ArticleVO vo = new ArticleVO();
+		vo.setUid(uid);
+		vo.setCate(cateStr);
+		vo.setTitle(mr.getParameter("title"));
+		vo.setContent(mr.getParameter("content"));
+		vo.setFile(fName == null ? 0 : 1);
+		vo.setRegip(req.getRemoteAddr());
+		
+		int parent  = service.insertArticle(vo);
+		String newName = service.reNameFile(fName, uid, savePath);
+		service.insertFile(parent, newName, fName);
+		
+		resp.sendRedirect("/FarmStory2/board/list.do?group="+group+"&cate="+cate+"&pg=1");
 	}
 }

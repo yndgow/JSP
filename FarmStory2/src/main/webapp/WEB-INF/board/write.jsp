@@ -9,7 +9,7 @@ $(()=>{
 });
 </script>
 <main id="board" class="write">
-    <form action="/FarmStory2/board/write.do" method="post">
+    <form action="/FarmStory2/board/write.do" method="post" enctype="multipart/form-data">
     <input type="hidden" name="group" value="${group}">
     <input type="hidden" name="cate" value="${cate}">
     <input type="hidden" name="uid" value="${sessUser.uid}">

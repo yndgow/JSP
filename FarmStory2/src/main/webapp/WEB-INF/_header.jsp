@@ -30,9 +30,9 @@
           <a href="/FarmStory2/index.do">HOME |</a>
           <c:if test="${sessUser eq null }">
           <a href="/FarmStory2/user/login.do">로그인 |</a>
+          <a href="/FarmStory2/user/terms.do">회원가입 |</a>
           </c:if>
           <c:if test="${sessUser ne null }">
-          <a href="/FarmStory2/user/terms.do">회원가입 |</a>
           <a href="/FarmStory2/user/proc/logout.do">로그아웃 |</a>
           </c:if>
           <a href="#">고객센터</a>

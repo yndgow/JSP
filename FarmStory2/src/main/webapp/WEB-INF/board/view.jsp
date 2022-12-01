@@ -20,7 +20,7 @@ $(()=>{
             <c:if test="${vo.oriName ne null}">
             <tr>
                 <th>파일</th>
-                <td><a href="/FarmStory2/board/downlaod.do?fno=${vo.fno}">${vo.oriName}</a><span>${vo.download}</span>회 다운로드</td>
+                <td><a href="/FarmStory2/board/download.do?fno=${vo.fno}">${vo.oriName}</a><span>&emsp;${vo.download}</span>회 다운로드</td>
             </tr>
             </c:if>
             <tr>
