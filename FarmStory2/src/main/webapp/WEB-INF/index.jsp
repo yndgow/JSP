@@ -50,7 +50,7 @@
         <tr>
           <td>></td>
           <td>
-            <a href="/FarmStory1/board/view.jsp?group=croptalk&cate=3&pg=1&no=">토마토</a>
+            <a href="/FarmStory2/board/view.jsp?group=croptalk&cate=3&pg=1&no=">토마토</a>
           </td>
         </tr>
       </table>

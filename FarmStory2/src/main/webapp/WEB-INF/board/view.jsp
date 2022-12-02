@@ -3,12 +3,13 @@
 <jsp:include page="../_header.jsp"/>
 <script>
 $(()=>{
-	$('.btnList').click(e=>{
-		e.preventDefault();
-		history.back();
-	});	
+	$('.btnRemove').click(e=>{
+		let result = confirm('삭제하시겠습니까?');
+		if(!result){
+			return false;
+		}
+	});
 });
-
 </script>
 <main id="board" class="view">
     <table>
@@ -30,35 +31,40 @@ $(()=>{
         </caption>
     </table>
     <div>
-        <a href="./delete.do" class="btn btnRemove">삭제</a>
-        <a href="./modify.do" class="btn btnModify">수정</a>
-        <a href="./list.do" class="btn btnList">목록</a>
+        <a href="/FarmStory2/board/remove.do?no=${vo.no}&group=${group}&cate=${cate}&pg=${pg}" class="btn btnRemove">삭제</a>
+        <a href="/FarmStory2/board/modify.do?no=${vo.no}&group=${group}&cate=${cate}&pg=${pg}" class="btn btnModify">수정</a>
+        <a href="./list.do?group=${group}&cate=${cate}&pg=${pg}" class="btn btnList">목록</a>
     </div>
 
     <!-- 댓글목록 -->
     <section class="commentList">
         <h3>댓글목록</h3>
+        <c:forEach var="co" items="${comments}">
         <article>
-            <span class="nick">길동이</span>
-            <span class="date">20-05-13</span>
-            <p class="content">댓글 샘플입니다.</p>
+            <span class="nick">${co.nick}</span>
+            <span class="date">${co.rdate}</span>
+            <p class="content">${co.content}</p>
             <div>
                 <a href="#" class="remove">삭제</a>
                 <a href="#" class="modify">수정</a>
             </div>
         </article>
-
+		</c:forEach>
+		<c:if test="${empty comments}">
         <p class="empty">등록된 댓글이 없습니다.</p>
+        </c:if>
     </section>
 
     <!-- 댓글쓰기 -->
     <section class="commentForm">
         <h3>댓글쓰기</h3>
-        <form action="">
+        <form action="#">
+        	<input type="hidden" name="uid" value="${sessUser.uid}">
+        	<input type="hidden" name="no" value="${vo.no}">
             <textarea name="content" placeholder="댓글내용 입력"></textarea>
             <div>
-                <a href="#" class="btn btnCancel">취소</a>
-                <input type="submit" value="작성완료" class="btn btnComplete">
+                <a href="./list.do?group=${group}&cate=${cate}&pg=${pg}" class="btn btnCancel">취소</a>
+                <input type="submit" value="작성완료" class="btn btnCompleteComment">
             </div>
         </form>
     </section>

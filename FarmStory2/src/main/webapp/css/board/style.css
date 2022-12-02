@@ -309,7 +309,7 @@
     padding: 8px;
     border: 1px solid #bebebe;
 }
-#board.view > .commentForm div > .btnComplete {
+#board.view > .commentForm div > .btnCompleteComment {
     padding: 7px;
     border: 1px solid #3b3c3f;
     background: #4b545e;

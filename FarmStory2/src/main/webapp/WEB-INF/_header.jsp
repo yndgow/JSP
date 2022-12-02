@@ -17,6 +17,7 @@
   	<script src="/FarmStory2/js/user/terms.js"></script>
   	<script src="/FarmStory2/js/user/validation.js"></script>
   	<script src="/FarmStory2/js/user/emailAuth.js"></script>
+  	<script src="/FarmStory2/js/board/comment.js"></script>
 	
   </head>
   <body>

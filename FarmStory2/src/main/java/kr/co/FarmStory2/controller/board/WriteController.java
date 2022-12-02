@@ -23,6 +23,7 @@ public class WriteController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setAttribute("group", req.getParameter("group"));
 		req.setAttribute("cate", req.getParameter("cate"));
+		req.setAttribute("pg", req.getParameter("pg"));
 		req.setAttribute("groupNum", req.getParameter("groupNum"));
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/board/write.jsp");
 		dispatcher.forward(req, resp);
@@ -49,8 +50,10 @@ public class WriteController extends HttpServlet{
 		vo.setRegip(req.getRemoteAddr());
 		
 		int parent  = service.insertArticle(vo);
-		String newName = service.reNameFile(fName, uid, savePath);
-		service.insertFile(parent, newName, fName);
+		if(fName != null) {
+			String newName = service.reNameFile(fName, uid, savePath);
+			service.insertFile(parent, newName, fName);
+		}
 		
 		resp.sendRedirect("/FarmStory2/board/list.do?group="+group+"&cate="+cate+"&pg=1");
 	}

@@ -2,14 +2,20 @@ package kr.co.FarmStory2.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FileUtils;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -35,6 +41,11 @@ public enum ArticleService {
 		return dao.selectArticle(no);
 	}
 
+	public List<ArticleVO> selectComments(String parent) {
+		return dao.selectComments(parent);
+	}
+	
+	
 	public int insertArticle(ArticleVO vo) {
 		return dao.insertArticle(vo);
 	}
@@ -43,16 +54,60 @@ public enum ArticleService {
 		dao.insertFile(parent, newName, oriName);
 	}
 	
-	public FileVO selectFile(String fno) {
-		return dao.selectFile(fno);
+	public ArticleVO insertComment(ArticleVO vo) {
+		return dao.insertComment(vo);
 	}
 	
 	public void updateFileDownload(String fno) {
 		dao.updateFileDownload(fno);
 	}
 	
+	public int updateCommentHit(String parent) {
+		return dao.updateCommentHit(parent);
+	}
+	
+	public void updateArticle(String no, String title, String content) {
+		dao.updateArticle(no, title, content);
+	}
+	
+	public void updateArticleHit(String no) {
+		dao.updateArticleHit(no);
+	}
+	
+	public String deleteArticle(String no, String file) {
+		return dao.deleteArticle(no, file);
+	}
+	
+	public List<ArticleVO> selectArticleLatest(String cate) {
+		return dao.selectArticleLatest(cate);
+	}
+		
 	
 	
+	
+	
+	public void selectFile(String fno, HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		FileVO vo = dao.selectFile(fno);
+		
+		String savePath = req.getServletContext().getRealPath("/file");
+		
+		File newFile = new File(savePath + "/" + vo.getNewName());
+        
+        byte fileByte[] = FileUtils.readFileToByteArray(newFile);
+        
+        resp.setContentType("application/octet-stream");
+        resp.setContentLength(fileByte.length);
+        
+        resp.setHeader("Content-Disposition", "attachment; fileName=" + URLEncoder.encode(vo.getOriName(),"UTF-8"));
+        resp.setHeader("Content-Transfer-Encoding", "binary");
+        resp.setHeader("Pragma", "no-cache");
+		resp.setHeader("Cache-Control", "private");
+        
+        resp.getOutputStream().write(fileByte);
+        resp.getOutputStream().flush();
+        resp.getOutputStream().close();
+		
+	}
 	
 	public int getLastPageNum(int total) {
 		int lastPageNum = 0;
@@ -163,6 +218,18 @@ public enum ArticleService {
 		return newName;
 	}
 		
+	public void jsonObj(String key, int value, HttpServletResponse resp) throws IOException {
+		JsonObject json = new JsonObject();
+		json.addProperty(key, value);
+		PrintWriter writer = resp.getWriter();
+		writer.print(json.toString());
+	}
+	public void gsonTojson(Object obj, HttpServletResponse resp) throws IOException {
+		Gson gson = new Gson();
+		String jsonData = gson.toJson(obj);
+		PrintWriter writer = resp.getWriter();
+		writer.print(jsonData);
+	}
 }
 	
 	

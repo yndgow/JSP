@@ -34,7 +34,10 @@ public class ListController extends HttpServlet{
 		String cateStr = groupInfo.get("cateStr");
 		req.setAttribute("cateStr", cateStr);
 		
+		
 		String pg = req.getParameter("pg");
+		if(pg == null) pg = "1";
+		req.setAttribute("pg", pg);
 		String search = req.getParameter("search");
 		int currentPage = service.getCurrentPage(pg);// 현재 페이지 번호
 		

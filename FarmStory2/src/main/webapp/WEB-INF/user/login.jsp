@@ -1,5 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="../_header.jsp"/>
+<script>
+let success = ${success};
+if(success == "100"){
+	alert('회원정보가 일치하지 않거나 가입하지 않은 회원입니다.');
+}
+</script>
 <main id="user" class="login">
     <form action="/FarmStory2/user/login.do" method="post">
         <table>

@@ -31,9 +31,10 @@ public class LoginController extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String uid = req.getParameter("uid");
-		String pass = req.getParameter("pass");
-		
+		//String uid = req.getParameter("uid");
+		//String pass = req.getParameter("pass");
+		String uid = "qwqwqw";
+		String pass = "1234qw!@";
 		UserVO vo = service.selectUser(uid, pass);
 		
 		if(vo != null) {
