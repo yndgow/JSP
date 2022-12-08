@@ -12,7 +12,9 @@ $(()=>{
 });
 </script>
 <main id="board" class="view">
+
     <table>
+    <caption><img src="../img/sub_nav_tit_cate${groupNum}_tit${cate}.png" alt="글보기"></caption>
         <caption>
             <tr>
                 <th>제목</th>

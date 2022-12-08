@@ -1,6 +1,7 @@
 package kr.co.FarmStory2.controller.board;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,10 +19,11 @@ public class ViewController extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		req.setAttribute("group", req.getParameter("group"));
+		String group = req.getParameter("group");
+		String cate = req.getParameter("cate");
+		req.setAttribute("group", group);
 		req.setAttribute("cateStr", req.getParameter("cateStr"));
-		req.setAttribute("cate", req.getParameter("cate"));
+		req.setAttribute("cate", cate);
 		req.setAttribute("pg", req.getParameter("pg"));
 		
 		String no = req.getParameter("no");
@@ -34,6 +36,10 @@ public class ViewController extends HttpServlet{
 		
 		// 글 조회수 증가
 		service.updateArticleHit(no);
+		
+		HashMap<String, String> grInfo = service.getGroupInfo(group, cate);
+		req.setAttribute("groupNum", grInfo.get("groupNum"));
+		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/board/view.jsp");
 		dispatcher.forward(req, resp);
